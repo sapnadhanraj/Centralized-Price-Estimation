@@ -19,6 +19,8 @@ app.get('/home', (req, res) => {
 
 // Set EJS as the view engine
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 // Render query_1 page with an empty products array
 app.get('/first', (req, res) => {
