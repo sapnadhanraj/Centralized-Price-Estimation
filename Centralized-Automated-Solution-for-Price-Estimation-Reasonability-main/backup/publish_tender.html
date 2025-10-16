@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tender Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background-color: white;
+            padding: 20px;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            color: #555;
+        }
+        input, select, textarea {
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+        }
+        input[type="file"] {
+            padding: 3px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Submit Tender Details</h2>
+    <form id="tenderForm" enctype="multipart/form-data">
+        <label for="project">Project Name</label>
+        <input type="text" id="project" name="project" placeholder="Enter project name" required>
+
+        <label for="estimatedCost">Estimated Cost of Project (in Cr.)</label>
+        <input type="number" id="estimatedCost" name="estimatedCost" placeholder="Enter estimated cost" required>
+
+        <label for="earnestMoney">Earnest Money Deposit (in Rs.)</label>
+        <input type="number" id="earnestMoney" name="earnestMoney" placeholder="Enter deposit amount" required>
+
+        <label for="timeLimit">Time Limit</label>
+        <input type="text" id="timeLimit" name="timeLimit" placeholder="Enter time limit" required>
+
+        <label for="eligibilityCriteria">Eligibility Criteria</label>
+        <textarea id="eligibilityCriteria" name="eligibilityCriteria" rows="4" placeholder="Enter eligibility criteria" required></textarea>
+
+        <label for="description">Detailed Description</label>
+        <textarea id="description" name="description" rows="6" placeholder="Enter detailed project description" required></textarea>
+
+        <label for="requestFile">Upload Request Documents (multiple)</label>
+        <input type="file" id="requestFile" name="requestFile" accept=".pdf,.png,.jpg,.jpeg" multiple required>
+
+        <label for="posterFile">Upload Poster Image</label>
+        <input type="file" id="posterFile" name="posterFile" accept="image/*" required>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('tenderForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Get the image poster file name
+        const posterFileInput = document.getElementById('posterFile');
+        const posterFileName = posterFileInput.files[0].name; // Store the file name only
+
+        // Get other form data
+        const formData = {
+            project: document.getElementById('project').value,
+            estimatedCost: document.getElementById('estimatedCost').value,
+            earnestMoney: document.getElementById('earnestMoney').value,
+            timeLimit: document.getElementById('timeLimit').value,
+            eligibilityCriteria: document.getElementById('eligibilityCriteria').value,
+            description: document.getElementById('description').value,
+            requestFiles: Array.from(document.getElementById('requestFile').files).map(file => file.name), // Save file names only
+            posterFile: posterFileName // Store the poster image file name
+        };
+
+        // Store the data in localStorage
+        let tenders = JSON.parse(localStorage.getItem('tenders')) || [];
+        tenders.push(formData);
+        localStorage.setItem('tenders', JSON.stringify(tenders));
+
+        // Redirect to the view tender page
+        window.location.href = 'view_tender.html';
+    });
+
+
+</script>
+
+</body>
+</html>
