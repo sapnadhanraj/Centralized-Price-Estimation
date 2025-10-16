@@ -26,7 +26,6 @@
 			font-size: 26px;
 			font-weight: 300;
 			text-align: center;
-
 			position: relative;
 			margin: 30px 0 60px;
 		}
@@ -35,6 +34,10 @@
 			color: #000;
 			font-size: 26px;
 			font-weight: 300;
+			text-align: center;
+			text-transform: uppercase;
+			position: relative;
+			margin: 30px 0 60px;
 			text-align: center;
 			text-transform: uppercase;
 			position: relative;
@@ -355,14 +358,13 @@
 		</div>
 		
 		<div class="logo">
-			Binary Whim's
+			Price Estimator
 		</div>
 		<div class="nav-items">
-			<li><a href="home">Home</a></li>
-			<li><a href="view_tender">Reports</a></li>
-			<li><a href="publish_tender">Publish Tender</a></li>
+			<li><a href="index.html">Home</a></li>
+			<!-- <li><a href="tender/view_tender.html">Reports</a></li>
+			<li><a href="tender/publish_tender.html">Publish Tender</a></li> -->
 			<li><a onclick="showPopup()">Search by Query</a></li>
-			
 		</div>
 		<div class="search-icon">
 			<span class="fas fa-search"></span>
@@ -376,8 +378,8 @@
 			
 		</form>
 
-		<img src="../img/man-user-circle-icon.png" alt="Profile" class="profile-icon" id="profileImage">
-		<img src="../img/logout.png" alt="Logout" id="logout" class="profile-icon" onclick="logout()">
+		<img src="img/man-user-circle-icon.png" alt="Profile" class="profile-icon" id="profileImage">
+		<img src="img/logout.png" alt="Logout" id="logout" class="profile-icon" onclick="logout()">
 	</nav>
 
 
@@ -1268,7 +1270,7 @@
 <footer class="footer">
 	<div class="container-foot">
 		<p class="copyright-text">
-			&copy; <span id="currentYear"></span> Team Binary Whims. All Rights Reserved.
+			&copy; <span id="currentYear"></span> Price Estimator. All Rights Reserved.
 		</p>
 		<ul class="social-icons">
 			<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>

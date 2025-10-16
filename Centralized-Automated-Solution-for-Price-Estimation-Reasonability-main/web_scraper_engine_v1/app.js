@@ -5,7 +5,11 @@ const app = express();
 
 // Use the environment port if provided, otherwise default to 3000
 const PORT = process.env.PORT || 3000;
-// Serve static files from the "public" directory
+
+// Serve static files from the parent directory (where Style, img folders are located)
+app.use(express.static(path.join(__dirname, '..')));
+
+// Also serve files from current directory
 app.use(express.static(path.join(__dirname, '')));
 
 // Serve the "registration.html" file located in the parent directory as the starting page
@@ -36,12 +40,20 @@ app.get('/second', (req, res) => {
 app.get('/search', async (req, res) => {
     const { title, specs, make, model, queryPage } = req.query;
 
+    console.log('Search request received:');
+    console.log('Title:', title);
+    console.log('Specs:', specs);
+    console.log('Make:', make);
+    console.log('Model:', model);
+    console.log('Query Page:', queryPage);
+
     try {
         // Determine which template to render (query_1 or query_2)
         const viewTemplate = queryPage === 'query_1' ? 'query_1' : 'query_2';
 
         let products = [];
 
+        console.log('Starting scraping...');
         if (make && model) {
             // Scrape products with title, specs, make, and model (for query_1)
             products = await scrapeProducts(title, specs, make, model);
@@ -50,12 +62,16 @@ app.get('/search', async (req, res) => {
             products = await scrapeProducts(title, specs);
         }
 
+        console.log('Scraping completed. Products found:', products.length);
+        console.log('Products:', products);
+
         // Render the appropriate template with the scraped products
         res.render(viewTemplate, { products: products || [] });
 
     } catch (error) {
         console.error('Error fetching products:', error);
         // Render the appropriate template with an empty array in case of an error
+        const viewTemplate = queryPage === 'query_1' ? 'query_1' : 'query_2';
         res.render(viewTemplate, { products: [] });
     }
 });

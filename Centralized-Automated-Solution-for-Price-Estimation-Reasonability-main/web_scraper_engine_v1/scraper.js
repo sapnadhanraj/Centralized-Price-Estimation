@@ -1,7 +1,12 @@
-const puppeteer = require('puppeteer');
+﻿const puppeteer = require('puppeteer');
 
 async function scrapeProducts(title, specs, make = null, model = null) {
-    const browser = await puppeteer.launch({ headless: true });
+    console.log('Scraper started with params:', { title, specs, make, model });
+    
+    const browser = await puppeteer.launch({ 
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox']
+    });
     const page = await browser.newPage();
 
     // Construct Google Shopping search URL
@@ -12,16 +17,23 @@ async function scrapeProducts(title, specs, make = null, model = null) {
         searchQuery = `${title} ${specs}`.replace(/ /g, '+');
     }
     const url = `https://www.google.com/search?q=${searchQuery}&tbm=shop`;
+    
+    console.log('Search URL:', url);
 
     try {
-        await page.goto(url, { waitUntil: 'networkidle2' });
+        console.log('Navigating to Google Shopping...');
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 30000 });
+        
+        console.log('Page loaded successfully');
 
         // Scraping product details
-        const products = await page.evaluate(async () => {
+        const products = await page.evaluate(() => {
             let productData = [];
             let items = document.querySelectorAll('.sh-dgr__content');
+            
+            console.log('Found items:', items.length);
 
-            for (let i = 0; i < 5 && i < items.length; i++) {
+            for (let i = 0; i < items.length && productData.length < 5; i++) {
                 const item = items[i];
 
                 const title = item.querySelector('.tAxDx')?.textContent || 'N/A';
@@ -35,45 +47,35 @@ async function scrapeProducts(title, specs, make = null, model = null) {
                     const source = linkElement ? linkElement.querySelector('.aULzUe')?.textContent.trim() : 'N/A';
                     const productUrl = linkElement ? linkElement.href : '';
 
-                    // Fetch the release date from another source
-                    const releaseDate = await fetchReleaseDate(title); // Fetching logic moved outside
-                    if(i==0) {continue;}
+                    // Get current date as release date
+                    const releaseDate = new Date().toISOString().split('T')[0];
+                    
                     productData.push({
                         title,
                         price,
                         source,
                         productUrl,
                         image,
-                        releaseDate // Include the release date in the product data
+                        releaseDate
                     });
                 }
             }
 
             return productData;
-
-            async function fetchReleaseDate(title) {
-                // Logic to fetch the release date based on the title
-                // This is just an example; replace it with actual scraping or API calls
-                const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(title + ' release date')}`;
-                const response = await fetch(searchUrl);
-                const text = await response.text();
-
-                // Implement logic to parse the response text and extract the release date
-                // Placeholder logic (you'll need to replace it with actual parsing)
-                const releaseDateMatch = text.match(/Release Date:\s*(\d{1,2}\/\d{1,2}\/\d{4})/);
-                return releaseDateMatch ? releaseDateMatch[1] : 'Not Available';
-            }
         });
 
+        console.log('Products scraped:', products.length);
+        
         if (products.length === 0) {
-            console.log('No products found. Please check if the selectors are correct.');
+            console.log('No products found. The page structure might have changed or no results available.');
         }
 
         await browser.close();
         return products;
 
     } catch (error) {
-        console.error('Error during scraping:', error);
+        console.error('Error during scraping:', error.message);
+        console.error('Stack trace:', error.stack);
         await browser.close();
         return []; // Return an empty array in case of error
     }
