@@ -179,8 +179,16 @@ button:hover {
     const password = document.getElementById("password").value;
 
     if (name && uniqueID && password) {
-        localStorage.setItem("locopilot", JSON.stringify({ name, uniqueID, password }));
-        alert("Registration Successful! Redirecting to login...");
+        localStorage.setItem("locopilot", JSON.stringify({ 
+            name, 
+            uniqueID, 
+            password,
+            email: "",
+            mobile: "",
+            organization: "",
+            post: ""
+        }));
+        alert("Registration Successful! You can complete your profile later.");
         toggleForms();
     } else {
         alert("Please fill in all fields.");
@@ -195,6 +203,15 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     const locopilotData = JSON.parse(localStorage.getItem("locopilot"));
     
     if (locopilotData && locopilotData.uniqueID === loginID && locopilotData.password === loginPassword) {
+        // Store current logged-in user session
+        localStorage.setItem("currentUser", JSON.stringify({
+            name: locopilotData.name,
+            email: locopilotData.email,
+            mobile: locopilotData.mobile,
+            organization: locopilotData.organization,
+            post: locopilotData.post,
+            uniqueID: locopilotData.uniqueID
+        }));
         alert("Login Successful! Welcome " + locopilotData.name);
         window.location.href = "home";
     } else {

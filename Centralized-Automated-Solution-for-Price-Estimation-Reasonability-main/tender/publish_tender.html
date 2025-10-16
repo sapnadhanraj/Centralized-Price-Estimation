@@ -263,6 +263,9 @@
         }
 
         function logout(){
+			// Clear current user session
+			localStorage.removeItem("currentUser");
+			alert("Logged out successfully!");
             window.open('/registration.html', '_self');
         }
         function showPopup() {
@@ -284,15 +287,33 @@
 <div class="profile-popup" id="profilePopup">
 	<img src="/img/man-user-circle-icon.png" alt="Profile Image">
 	<div class="profile-info">
-		<h3>Ram Singh</h3>
-		<p class="email">ram.singh@ntro.com</p>
-		<p class="mobile">+91 9579029553</p>
-		<p class="org">National Technical Research Organisation (NTRO)</p>
-		<p class="post">Senior Analyst</p>
+		<h3 id="userName">Guest User</h3>
+		<p class="email" id="userEmail">guest@example.com</p>
+		<p class="mobile" id="userMobile">+91 XXXXXXXXXX</p>
+		<p class="org" id="userOrg">Organization</p>
+		<p class="post" id="userPost">Designation</p>
 	</div>
 </div>
 
 <script>
+	// Load user profile dynamically
+	function loadUserProfile() {
+		const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+		
+		if (currentUser) {
+			document.getElementById("userName").textContent = currentUser.name || "Guest User";
+			document.getElementById("userEmail").textContent = currentUser.email || "guest@example.com";
+			document.getElementById("userMobile").textContent = currentUser.mobile || "+91 XXXXXXXXXX";
+			document.getElementById("userOrg").textContent = currentUser.organization || "Organization";
+			document.getElementById("userPost").textContent = currentUser.post || "Designation";
+		} else {
+			console.log("No user logged in");
+		}
+	}
+
+	// Load profile on page load
+	window.addEventListener('DOMContentLoaded', loadUserProfile);
+
 	const profileImage = document.getElementById('profileImage');
 	const profilePopup = document.getElementById('profilePopup');
 
@@ -305,7 +326,7 @@
 			profilePopup.classList.remove('active');
 		}
 	});
-	</script>
+</script>
 
 	
 <div class="container">
