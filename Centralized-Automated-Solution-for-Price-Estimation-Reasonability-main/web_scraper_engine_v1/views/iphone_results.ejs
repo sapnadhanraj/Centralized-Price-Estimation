@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iPhone Price Comparison Results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background: #e2eaef;
+            font-family: "Open Sans", sans-serif;
+            padding: 20px 0;
+        }
+
+        .header-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header-section h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .search-query {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .results-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-btn {
+            background: #6c757d;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+            text-decoration: none;
+            color: white;
+        }
+
+        .results-table {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .table thead th {
+            border: none;
+            padding: 15px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s;
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+            transform: scale(1.01);
+        }
+
+        .table tbody td {
+            padding: 15px;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .product-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .product-name {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: #7ac400;
+        }
+
+        .source-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .badge-amazon {
+            background: #ff9900;
+            color: white;
+        }
+
+        .badge-flipkart {
+            background: #2874f0;
+            color: white;
+        }
+
+        .badge-apple {
+            background: #000;
+            color: white;
+        }
+
+        .badge-croma {
+            background: #00a650;
+            color: white;
+        }
+
+        .badge-reliance {
+            background: #d51243;
+            color: white;
+        }
+
+        .view-btn {
+            background: #667eea;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .view-btn:hover {
+            background: #5568d3;
+            text-decoration: none;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-results i {
+            font-size: 64px;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .no-results h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .no-results p {
+            color: #666;
+        }
+
+        .stats-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 10px;
+            background: #f8f9fa;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .best-deal {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-section">
+        <h1><i class="fab fa-apple"></i> iPhone Price Comparison</h1>
+        <p class="search-query">
+            <% if (searchQuery) { %>
+                Showing results for: <strong><%= searchQuery %></strong>
+            <% } else { %>
+                Search Results
+            <% } %>
+        </p>
+        <p style="font-size: 14px; opacity: 0.8; margin-top: 5px;">
+            <i class="fas fa-store"></i> Comparing prices from Amazon, Flipkart, Apple, Croma, and Reliance Digital
+        </p>
+    </div>
+
+    <div class="results-container">
+        <a href="/home" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Dashboard
+        </a>
+
+        <% if (products && products.length > 0) { %>
+            <!-- Statistics Card -->
+            <div class="stats-card">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value"><%= products.length %></span>
+                        <span class="stat-label">Results Found</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">
+                            <% 
+                            const prices = products.filter(p => p.price && p.price !== 'N/A').map(p => {
+                                const priceNum = parseFloat(p.price.replace(/[₹,]/g, ''));
+                                return priceNum;
+                            });
+                            const minPrice = prices.length > 0 ? Math.min(...prices).toLocaleString('en-IN') : 'N/A';
+                            %>
+                            ₹<%= minPrice %>
+                        </span>
+                        <span class="stat-label">Best Price</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">
+                            <% 
+                            const maxPrice = prices.length > 0 ? Math.max(...prices).toLocaleString('en-IN') : 'N/A';
+                            %>
+                            ₹<%= maxPrice %>
+                        </span>
+                        <span class="stat-label">Highest Price</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value">
+                            <% 
+                            const priceDiff = prices.length > 0 ? (Math.max(...prices) - Math.min(...prices)).toLocaleString('en-IN') : '0';
+                            %>
+                            ₹<%= priceDiff %>
+                        </span>
+                        <span class="stat-label">Price Difference</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Table -->
+            <div class="results-table">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Source</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% 
+                        // Sort products by price (lowest first)
+                        const sortedProducts = products.filter(p => p.price && p.price !== 'N/A').sort((a, b) => {
+                            const priceA = parseFloat(a.price.replace(/[₹,]/g, ''));
+                            const priceB = parseFloat(b.price.replace(/[₹,]/g, ''));
+                            return priceA - priceB;
+                        });
+
+                        sortedProducts.forEach((product, index) => { 
+                            const isBestDeal = index === 0;
+                        %>
+                            <tr class="<%= isBestDeal ? 'best-deal' : '' %>">
+                                <td>
+                                    <img src="<%= product.image || 'https://via.placeholder.com/80' %>" 
+                                         alt="<%= product.name %>" 
+                                         class="product-image">
+                                </td>
+                                <td>
+                                    <div class="product-name">
+                                        <%= product.name %>
+                                        <% if (isBestDeal) { %>
+                                            <span class="badge badge-success ml-2">Best Deal!</span>
+                                        <% } %>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="product-price">₹<%= product.price %></div>
+                                </td>
+                                <td>
+                                    <% 
+                                    let badgeClass = 'source-badge';
+                                    if (product.source.toLowerCase().includes('amazon')) badgeClass += ' badge-amazon';
+                                    else if (product.source.toLowerCase().includes('flipkart')) badgeClass += ' badge-flipkart';
+                                    else if (product.source.toLowerCase().includes('apple')) badgeClass += ' badge-apple';
+                                    else if (product.source.toLowerCase().includes('croma')) badgeClass += ' badge-croma';
+                                    else if (product.source.toLowerCase().includes('reliance')) badgeClass += ' badge-reliance';
+                                    %>
+                                    <span class="<%= badgeClass %>">
+                                        <i class="fas fa-store"></i> <%= product.source %>
+                                    </span>
+                                </td>
+                                <td>
+                                    <a href="<%= product.link %>" 
+                                       target="_blank" 
+                                       rel="noopener noreferrer" 
+                                       class="view-btn">
+                                        <i class="fas fa-external-link-alt"></i> View on <%= product.source.split(' ')[0] %>
+                                    </a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        <% } else { %>
+            <!-- No Results -->
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <h3>No Results Found</h3>
+                <p>We couldn't find any prices for the selected iPhone model.</p>
+                <p>Please try a different model or check back later.</p>
+                <a href="/home" class="btn btn-primary mt-3">
+                    <i class="fas fa-arrow-left"></i> Try Another Search
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>

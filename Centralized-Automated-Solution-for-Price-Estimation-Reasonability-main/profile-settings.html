@@ -109,6 +109,27 @@
         .alert {
             border-radius: 8px;
             margin-bottom: 20px;
+            padding: 12px 16px;
+            font-size: 14px;
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .read-only {
@@ -150,48 +171,34 @@
         </div>
 
         <div id="successAlert" class="alert alert-success" style="display: none;">
-            <i class="fas fa-check-circle"></i> Profile updated successfully!
+            <i class="fas fa-check-circle"></i> <span id="successMessage">Profile updated successfully!</span>
+        </div>
+
+        <div id="errorAlert" class="alert alert-error" style="display: none;">
+            <i class="fas fa-exclamation-circle"></i> <span id="errorMessage"></span>
         </div>
 
         <form id="profileForm">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="userName"><i class="fas fa-user"></i> Full Name</label>
-                        <input type="text" class="form-control" id="userName" placeholder="Enter your name" required>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="userID"><i class="fas fa-id-card"></i> Unique ID</label>
-                        <input type="text" class="form-control read-only" id="userID" placeholder="Your unique ID" readonly>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label for="userName"><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" class="form-control" id="userName" placeholder="Enter your name" required>
             </div>
 
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="userEmail"><i class="fas fa-envelope"></i> Email Address</label>
-                        <input type="email" class="form-control" id="userEmail" placeholder="example@email.com">
+                        <input type="email" class="form-control read-only" id="userEmail" placeholder="example@email.com" readonly>
+                        <small class="text-muted">Email cannot be changed</small>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="userMobile"><i class="fas fa-phone"></i> Mobile Number</label>
-                        <input type="tel" class="form-control" id="userMobile" placeholder="+91 XXXXXXXXXX">
+                        <input type="tel" class="form-control" id="userMobile" placeholder="10-digit phone number" maxlength="10" pattern="[0-9]{10}" required>
+                        <small class="text-muted">Must be 10 digits</small>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="userOrganization"><i class="fas fa-building"></i> Organization</label>
-                <input type="text" class="form-control" id="userOrganization" placeholder="Enter your organization">
-            </div>
-
-            <div class="form-group">
-                <label for="userPost"><i class="fas fa-briefcase"></i> Designation/Post</label>
-                <input type="text" class="form-control" id="userPost" placeholder="Enter your designation">
             </div>
 
             <div class="actions">
@@ -206,21 +213,51 @@
     </div>
 
     <script>
+        // Function to show alert messages
+        function showAlert(type, message) {
+            if (type === 'success') {
+                document.getElementById('successMessage').textContent = message;
+                document.getElementById('successAlert').style.display = 'block';
+                document.getElementById('errorAlert').style.display = 'none';
+                
+                // Auto-hide after 3 seconds
+                setTimeout(() => {
+                    document.getElementById('successAlert').style.display = 'none';
+                }, 3000);
+            } else if (type === 'error') {
+                document.getElementById('errorMessage').textContent = message;
+                document.getElementById('errorAlert').style.display = 'block';
+                document.getElementById('successAlert').style.display = 'none';
+                
+                // Auto-hide after 5 seconds
+                setTimeout(() => {
+                    document.getElementById('errorAlert').style.display = 'none';
+                }, 5000);
+            }
+            
+            // Scroll to top to show alert
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Phone validation function
+        function validatePhone(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone);
+        }
+
         // Load current user data
         function loadProfile() {
-            const userData = JSON.parse(localStorage.getItem("locopilot"));
             const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-            if (userData) {
-                document.getElementById("userName").value = userData.name || "";
-                document.getElementById("userID").value = userData.uniqueID || "";
-                document.getElementById("userEmail").value = userData.email || "";
-                document.getElementById("userMobile").value = userData.mobile || "";
-                document.getElementById("userOrganization").value = userData.organization || "";
-                document.getElementById("userPost").value = userData.post || "";
+            if (currentUser) {
+                document.getElementById("userName").value = currentUser.name || "";
+                document.getElementById("userEmail").value = currentUser.email || "";
+                document.getElementById("userMobile").value = currentUser.mobile || "";
             } else {
-                alert("No user logged in. Redirecting to registration...");
-                window.location.href = "registration.html";
+                showAlert('error', 'No user logged in. Redirecting to registration...');
+                setTimeout(() => {
+                    window.location.href = "registration.html";
+                }, 2000);
             }
         }
 
@@ -228,44 +265,44 @@
         document.getElementById("profileForm").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            const userData = JSON.parse(localStorage.getItem("locopilot"));
+            const mobile = document.getElementById("userMobile").value;
+
+            // Validate phone number
+            if (!validatePhone(mobile)) {
+                showAlert('error', 'Please enter a valid 10-digit phone number.');
+                return;
+            }
+
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            const allUsers = JSON.parse(localStorage.getItem("locopilot")) || [];
             
             // Update user data
-            const updatedData = {
+            const updatedUserData = {
                 name: document.getElementById("userName").value,
-                uniqueID: document.getElementById("userID").value,
-                password: userData.password, // Keep existing password
                 email: document.getElementById("userEmail").value,
-                mobile: document.getElementById("userMobile").value,
-                organization: document.getElementById("userOrganization").value,
-                post: document.getElementById("userPost").value
+                mobile: mobile,
+                password: currentUser.password // Keep existing password
             };
 
-            // Save to localStorage
-            localStorage.setItem("locopilot", JSON.stringify(updatedData));
+            // Update in locopilot array
+            if (Array.isArray(allUsers)) {
+                const userIndex = allUsers.findIndex(user => user.email === currentUser.email);
+                if (userIndex !== -1) {
+                    allUsers[userIndex] = { ...allUsers[userIndex], ...updatedUserData };
+                    localStorage.setItem("locopilot", JSON.stringify(allUsers));
+                }
+            }
 
             // Update current user session (without password)
             const currentUserData = {
-                name: updatedData.name,
-                uniqueID: updatedData.uniqueID,
-                email: updatedData.email,
-                mobile: updatedData.mobile,
-                organization: updatedData.organization,
-                post: updatedData.post
+                name: updatedUserData.name,
+                email: updatedUserData.email,
+                mobile: updatedUserData.mobile
             };
             localStorage.setItem("currentUser", JSON.stringify(currentUserData));
 
             // Show success message
-            const successAlert = document.getElementById("successAlert");
-            successAlert.style.display = "block";
-            
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Hide alert after 3 seconds
-            setTimeout(() => {
-                successAlert.style.display = "none";
-            }, 3000);
+            showAlert('success', 'Profile updated successfully!');
         });
 
         // Load profile on page load

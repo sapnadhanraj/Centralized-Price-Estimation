@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>iPhone Price Search - Exact Model</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: "Open Sans", sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            max-width: 600px;
+            width: 90%;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        label i {
+            margin-right: 8px;
+            color: #667eea;
+        }
+
+        select, input[type="text"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-sizing: border-box;
+        }
+
+        select:focus, input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .search-btn:active {
+            transform: translateY(0);
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: #6c757d;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #5a6268;
+            text-decoration: none;
+            color: white;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .spinner {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: white;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .info-box p {
+            margin: 0;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .info-box i {
+            color: #667eea;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <a href="/home" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Dashboard
+    </a>
+
+    <div class="form-container">
+        <h1><i class="fab fa-apple"></i> iPhone Price Search</h1>
+        <p class="subtitle">Query 1: Search by Exact Model</p>
+
+        <div class="info-box">
+            <p><i class="fas fa-info-circle"></i> Select the exact iPhone model and storage to compare prices across 5 major retailers in India</p>
+        </div>
+
+        <form action="/search-iphone" method="GET" id="searchForm">
+            <div class="form-group">
+                <label for="series">
+                    <i class="fas fa-layer-group"></i> iPhone Series
+                </label>
+                <select id="series" name="series" required onchange="updateModels()">
+                    <option value="">-- Select Series --</option>
+                    <option value="iPhone 15">iPhone 15</option>
+                    <option value="iPhone 14">iPhone 14</option>
+                    <option value="iPhone 13">iPhone 13</option>
+                    <option value="iPhone 12">iPhone 12</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="model">
+                    <i class="fas fa-mobile-alt"></i> Model
+                </label>
+                <select id="model" name="model" required onchange="updateStorage()">
+                    <option value="">-- Select Model --</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="storage">
+                    <i class="fas fa-memory"></i> Storage
+                </label>
+                <select id="storage" name="storage" required>
+                    <option value="">-- Select Storage --</option>
+                </select>
+            </div>
+
+            <input type="hidden" name="queryType" value="exact_model">
+
+            <button type="submit" class="search-btn">
+                <i class="fas fa-search"></i> Search Prices
+            </button>
+        </form>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p class="loading-text">Searching prices across 5 retailers...</p>
+        <p class="loading-text" style="font-size: 14px; opacity: 0.8;">This may take 15-20 seconds</p>
+    </div>
+
+    <script>
+        const modelsData = {
+            "iPhone 15": [
+                { name: "iPhone 15 Pro Max", storage: ["256GB", "512GB", "1TB"] },
+                { name: "iPhone 15 Pro", storage: ["128GB", "256GB", "512GB", "1TB"] },
+                { name: "iPhone 15 Plus", storage: ["128GB", "256GB", "512GB"] },
+                { name: "iPhone 15", storage: ["128GB", "256GB", "512GB"] }
+            ],
+            "iPhone 14": [
+                { name: "iPhone 14 Pro Max", storage: ["128GB", "256GB", "512GB", "1TB"] },
+                { name: "iPhone 14 Pro", storage: ["128GB", "256GB", "512GB", "1TB"] },
+                { name: "iPhone 14 Plus", storage: ["128GB", "256GB", "512GB"] },
+                { name: "iPhone 14", storage: ["128GB", "256GB", "512GB"] }
+            ],
+            "iPhone 13": [
+                { name: "iPhone 13 Pro Max", storage: ["128GB", "256GB", "512GB", "1TB"] },
+                { name: "iPhone 13 Pro", storage: ["128GB", "256GB", "512GB", "1TB"] },
+                { name: "iPhone 13", storage: ["128GB", "256GB", "512GB"] },
+                { name: "iPhone 13 Mini", storage: ["128GB", "256GB", "512GB"] }
+            ],
+            "iPhone 12": [
+                { name: "iPhone 12 Pro Max", storage: ["128GB", "256GB", "512GB"] },
+                { name: "iPhone 12 Pro", storage: ["128GB", "256GB", "512GB"] },
+                { name: "iPhone 12", storage: ["64GB", "128GB", "256GB"] },
+                { name: "iPhone 12 Mini", storage: ["64GB", "128GB", "256GB"] }
+            ]
+        };
+
+        function updateModels() {
+            const series = document.getElementById('series').value;
+            const modelSelect = document.getElementById('model');
+            const storageSelect = document.getElementById('storage');
+            
+            modelSelect.innerHTML = '<option value="">-- Select Model --</option>';
+            storageSelect.innerHTML = '<option value="">-- Select Storage --</option>';
+            
+            if (series && modelsData[series]) {
+                modelsData[series].forEach(model => {
+                    const option = document.createElement('option');
+                    option.value = model.name;
+                    option.textContent = model.name;
+                    modelSelect.appendChild(option);
+                });
+            }
+        }
+
+        function updateStorage() {
+            const series = document.getElementById('series').value;
+            const modelName = document.getElementById('model').value;
+            const storageSelect = document.getElementById('storage');
+            
+            storageSelect.innerHTML = '<option value="">-- Select Storage --</option>';
+            
+            if (series && modelName && modelsData[series]) {
+                const selectedModel = modelsData[series].find(m => m.name === modelName);
+                if (selectedModel) {
+                    selectedModel.storage.forEach(storage => {
+                        const option = document.createElement('option');
+                        option.value = storage;
+                        option.textContent = storage;
+                        storageSelect.appendChild(option);
+                    });
+                }
+            }
+        }
+
+        document.getElementById('searchForm').addEventListener('submit', function() {
+            document.getElementById('loadingOverlay').classList.add('active');
+        });
+    </script>
+</body>
+</html>

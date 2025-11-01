@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const scrapeProducts = require('./scraper'); // Scraper logic
+const { getMockPrices } = require('./iphone-mock-data'); // Mock iPhone price data
 const app = express();
 
 // Use the environment port if provided, otherwise default to 3000
@@ -34,6 +35,89 @@ app.get('/first', (req, res) => {
 // Render query_2 page with an empty products array
 app.get('/second', (req, res) => {
     res.render('query_2', { products: [] });
+});
+
+// iPhone Query Routes
+app.get('/iphone-query-1', (req, res) => {
+    res.render('iphone_query_1');
+});
+
+// Direct iPhone Comparison Route (NEW)
+app.get('/compare-iphone', async (req, res) => {
+    const { name, storage, color, size, query } = req.query;
+
+    console.log('iPhone Comparison request received:');
+    console.log('Name:', name);
+    console.log('Storage:', storage);
+    console.log('Color:', color);
+    console.log('Size:', size);
+
+    try {
+        // Use mock data for demonstration
+        // In production, this would query a database with pre-scraped data
+        const products = getMockPrices(name);
+
+        console.log(`Found ${products.length} price entries for ${name}`);
+
+        res.render('iphone_comparison', { 
+            products: products || [],
+            selectedProduct: {
+                name: name,
+                storage: storage,
+                color: color,
+                size: size
+            },
+            searchQuery: name
+        });
+
+    } catch (error) {
+        console.error('Error fetching iPhone products:', error);
+        res.render('iphone_comparison', { 
+            products: [],
+            selectedProduct: {
+                name: name,
+                storage: storage,
+                color: color,
+                size: size
+            },
+            searchQuery: name,
+            error: error.message
+        });
+    }
+});
+
+app.get('/search-iphone', async (req, res) => {
+    const { series, model, storage, queryType } = req.query;
+
+    console.log('iPhone Search request received:');
+    console.log('Series:', series);
+    console.log('Model:', model);
+    console.log('Storage:', storage);
+    console.log('Query Type:', queryType);
+
+    try {
+        const searchQuery = `${model} ${storage}`;
+        console.log('Search Query:', searchQuery);
+
+        // Call the iPhone scraper
+        const products = await scrapeAllSites(searchQuery);
+
+        res.render('iphone_results', { 
+            products: products || [],
+            searchQuery: searchQuery,
+            model: model,
+            storage: storage
+        });
+
+    } catch (error) {
+        console.error('Error fetching iPhone products:', error);
+        res.render('iphone_results', { 
+            products: [],
+            searchQuery: '',
+            model: '',
+            storage: ''
+        });
+    }
 });
 
 // Handle search requests

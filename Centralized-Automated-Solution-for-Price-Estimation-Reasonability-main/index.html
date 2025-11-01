@@ -380,9 +380,7 @@
 		</div>
 		<div class="nav-items">
 			<li><a href="index.html">Home</a></li>
-			<!-- <li><a href="tender/view_tender.html">Reports</a></li>
-			<li><a href="tender/publish_tender.html">Publish Tender</a></li> -->
-			<li><a onclick="showPopup()">Search by Query</a></li>
+			<li><a href="profile-settings.html">Profile Settings</a></li>
 		</div>
 		<div class="search-icon">
 			<span class="fas fa-search"></span>
@@ -413,11 +411,11 @@
 
 	<script>
 		function query_1() {
-            window.open('first', '_self'); // Change 'anotherfile.html' to your file name
+            window.open('iphone-query-1', '_self');
         }
 
 		function query_2() {
-            window.open('second', '_self'); // Change 'anotherfile.html' to your file name
+            window.open('second', '_self');
         }
 
 		function logout(){
@@ -450,8 +448,6 @@
 		<h3 id="userName">Guest User</h3>
 		<p class="email" id="userEmail">guest@example.com</p>
 		<p class="mobile" id="userMobile">+91 XXXXXXXXXX</p>
-		<p class="org" id="userOrg">Organization</p>
-		<p class="post" id="userPost">Designation</p>
 	</div>
 	<button class="edit-profile-btn" onclick="window.location.href='profile-settings.html'">
 		<i class="fas fa-edit"></i> Edit Profile
@@ -467,8 +463,6 @@
 			document.getElementById("userName").textContent = currentUser.name || "Guest User";
 			document.getElementById("userEmail").textContent = currentUser.email || "guest@example.com";
 			document.getElementById("userMobile").textContent = currentUser.mobile || "+91 XXXXXXXXXX";
-			document.getElementById("userOrg").textContent = currentUser.organization || "Organization";
-			document.getElementById("userPost").textContent = currentUser.post || "Designation";
 		} else {
 			// If no user is logged in, redirect to registration page
 			console.log("No user logged in");
@@ -496,820 +490,202 @@
 <div class="container-xl">
 	<div class="row">
 		<div class="col-md-12">
-			<h1><b><b>Category Wise Products</b></b></h1>
+			<h1><b><b><i class="fab fa-apple"></i> iPhone Price Comparison Dashboard</b></b></h1>
+			<p style="text-align: center; color: #666; margin-bottom: 40px;">
+				Compare prices across Amazon India, Flipkart, Apple India, Croma, and Reliance Digital
+			</p>
 
-			<h2>Stationary</h2>
-			<div id="myCarousel3" class="carousel slide" data-ride="carousel" data-interval="0">
-				<!-- Carousel indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel3" data-slide-to="1"></li>
-					
-				</ol>
-				<!-- Wrapper for carousel items -->
-				<div class="carousel-inner">
-					<div class="item carousel-item active">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/printer.png" class="img-fluid" alt="">
-									</div>
-									<div class="thumb-content">
-										<h4>Printer</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>3200.00</strike> <b>2999.00</b></p>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/calculator-removebg-preview.png" class="img-fluid"
-											alt="Headphone">
-									</div>
-									<div class="thumb-content">
-										<h4>Calculator</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>1700.00</strike> <b>1500.00</b></p>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/notebook.png" class="img-fluid"
-											alt="Macbook">
-									</div>
-									<div class="thumb-content">
-										<h4>Notebook</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>200.00</strike> <b>150.00</b></p>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/stap.png" class="img-fluid"
-											alt="Nikon">
-									</div>
-									<div class="thumb-content">
-										<h4>Stapler</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>120.00</strike> <b>90.00</b></p>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item carousel-item">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/Pencils.jpg" class="img-fluid"
-											alt="Play Station">
-									</div>
-									<div class="thumb-content">
-										<h4>Pencils</h4>
-										<p class="item-price"><strike>35.00</strike> <span><b>30.00</b></span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/paper clip.png" class="img-fluid"
-											alt="Macbook">
-									</div>
-									<div class="thumb-content">
-										<h4>Paper Clip</h4>
-										<p class="item-price"><strike>15.00</strike> <span><b>10.00</b></span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/folder.png" class="img-fluid"
-											alt="Speaker">
-									</div>
-									<div class="thumb-content">
-										<h4>Document Folder</h4>
-										<p class="item-price"><strike>25.00</strike> <span><b>20.00</b></span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/stationary/papers.png" class="img-fluid"
-											alt="Galaxy">
-									</div>
-									<div class="thumb-content">
-										<h4>Pages</h4>
-										<p class="item-price"><strike>100.00</strike> <span><b>79.00</b></span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				
-				</div>
-				<!-- Carousel controls -->
-				<a class="carousel-control-prev" href="#myCarousel3" data-slide="prev">
-					<i class="fa fa-angle-left"></i>
-				</a>
-				<a class="carousel-control-next" href="#myCarousel3" data-slide="next">
-					<i class="fa fa-angle-right"></i>
-				</a>
-			</div>
+			<!-- iPhone products will be dynamically rendered here by JavaScript -->
+			<div id="iphoneProductsContainer"></div>
 		</div>
 	</div>
 </div>
 
+<style>
+.iphone-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
 
+.iphone-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s;
+}
 
-	<div class="container-xl">
-		<div class="row">
-			<div class="col-md-12">
+.iphone-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
 
-				<h2>Electronic & Sensor</h2>
-				<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="0">
-					<!-- Carousel indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel" data-slide-to="1"></li>
-						
-					</ol>
-					<!-- Wrapper for carousel items -->
-					<div class="carousel-inner">
-						<div class="item carousel-item active">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/amateur-radio-transceiver-hf-3d-rendering-HNBB6K-removebg-preview.png" class="img-fluid" alt="">
-										</div>
-										<div class="thumb-content">
-											<h4>Radio Transceiver</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>4000.00</strike> <b>3690.00</b></p>
+.iphone-image {
+    width: 100%;
+    height: 200px;
+    object-fit: contain;
+    background: #f8f9fa;
+    padding: 15px;
+}
 
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/SoftwareDEfinedNetwork-removebg-preview.png" class="img-fluid"
-												alt="Headphone">
-										</div>
-										<div class="thumb-content">
-											<h4>SDR</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>2500.00</strike> <b>2300.99</b></p>
+.iphone-info {
+    padding: 15px;
+}
 
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/—Pngtree—hand drawn machine mechanical sensor_7010800.png" class="img-fluid"
-												alt="Macbook">
-										</div>
-										<div class="thumb-content">
-											<h4>Hand Drawn MMS</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>899.00</strike> <b>649.00</b></p>
+.iphone-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
 
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/ic.png" class="img-fluid"
-												alt="Nikon">
-										</div>
-										<div class="thumb-content">
-											<h4>IC</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>1000.00</strike> <b>950.00</b></p>
+.iphone-spec {
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
 
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item carousel-item">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/risberry.png" class="img-fluid"
-												alt="Play Station">
-										</div>
-										<div class="thumb-content">
-											<h4>Sony Play Station</h4>
-											<p class="item-price"><strike>3289.00</strike> <span>3269.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
+.iphone-spec i {
+    width: 16px;
+    font-size: 12px;
+    color: #7ac400;
+}
 
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/lora model.png" class="img-fluid"
-												alt="Macbook">
-										</div>
-										<div class="thumb-content">
-											<h4>Macbook Pro</h4>
-											<p class="item-price"><strike>3099.00</strike> <span>3069.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-												</ul>
-											</div>
+.compare-btn-new {
+    width: 100%;
+    background: #667eea;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
 
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/amateur-radio-transceiver-hf-3d-rendering-HNBB6K-removebg-preview.png" class="img-fluid"
-												alt="Speaker">
-										</div>
-										<div class="thumb-content">
-											<h4>Radio Transceiver</h4>
-											<p class="item-price"><strike>4000.00</strike> <span>3690.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
+.compare-btn-new:hover {
+    background: #5568d3;
+}
 
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electronic/risberry.png" class="img-fluid"
-												alt="Galaxy">
-										</div>
-										<div class="thumb-content">
-											<h4>Raspbery PI</h4>
-											<p class="item-price"><strike>3599.00</strike> <span>3269.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
+.badge-new {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
 
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-					
-					</div>
-					<!-- Carousel controls -->
-					<a class="carousel-control-prev" href="#myCarousel" data-slide="prev">
-						<i class="fa fa-angle-left"></i>
-					</a>
-					<a class="carousel-control-next" href="#myCarousel" data-slide="next">
-						<i class="fa fa-angle-right"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- 2nd -->
+.badge-pro { background: #ffd700; color: #333; }
+.badge-pro-max { background: #ff6b6b; color: white; }
+.badge-plus { background: #4ecdc4; color: white; }
+.badge-regular { background: #95a5a6; color: white; }
+</style>
 
-	<div class="container-xl">
-		<div class="row">
-			<div class="col-md-12">
+<script>
+// iPhone Products Data
+const iphones = [
+    // iPhone 15 Series
+    { name: 'iPhone 15 Pro Max', storage: '256GB', color: 'Natural Titanium', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702992', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
+    { name: 'iPhone 15 Pro', storage: '256GB', color: 'Natural Titanium', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845699311', badge: 'Pro', badgeClass: 'badge-pro' },
+    { name: 'iPhone 15 Plus', storage: '256GB', color: 'Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923777972', badge: 'Plus', badgeClass: 'badge-plus' },
+    { name: 'iPhone 15', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923780378', badge: 'Regular', badgeClass: 'badge-regular' },
+    
+    // iPhone 14 Series
+    { name: 'iPhone 14 Pro Max', storage: '256GB', color: 'Deep Purple', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
+    { name: 'iPhone 14 Pro', storage: '256GB', color: 'Deep Purple', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896', badge: 'Pro', badgeClass: 'badge-pro' },
+    { name: 'iPhone 14 Plus', storage: '128GB', color: 'Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027780876', badge: 'Plus', badgeClass: 'badge-plus' },
+    { name: 'iPhone 14', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027780876', badge: 'Regular', badgeClass: 'badge-regular' },
+    
+    // iPhone 13 Series
+    { name: 'iPhone 13 Pro Max', storage: '256GB', color: 'Sierra Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
+    { name: 'iPhone 13 Pro', storage: '256GB', color: 'Sierra Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro', badgeClass: 'badge-pro' },
+    { name: 'iPhone 13', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-blue-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1645572315986', badge: 'Regular', badgeClass: 'badge-regular' },
+    { name: 'iPhone 13 Mini', storage: '128GB', color: 'Blue', size: '5.4 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-mini-blue-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1645572315986', badge: 'Mini', badgeClass: 'badge-regular' },
+    
+    // iPhone 12 Series
+    { name: 'iPhone 12 Pro Max', storage: '256GB', color: 'Pacific Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
+    { name: 'iPhone 12 Pro', storage: '256GB', color: 'Pacific Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro', badgeClass: 'badge-pro' },
+    { name: 'iPhone 12', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-blue-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604021661000', badge: 'Regular', badgeClass: 'badge-regular' },
+    { name: 'iPhone 12 Mini', storage: '128GB', color: 'Blue', size: '5.4 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-mini-blue-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604021661000', badge: 'Mini', badgeClass: 'badge-regular' }
+];
 
+// Render iPhone products dynamically
+function renderIPhones() {
+    const container = document.querySelector('.container-xl .row .col-md-12');
+    if (!container) return;
+    
+    // Clear all carousels
+    const carousels = container.querySelectorAll('.carousel');
+    carousels.forEach(c => c.remove());
+    
+    // Clear all h2 headings except the main title
+    const headings = container.querySelectorAll('h2');
+    headings.forEach(h => h.remove());
+    
+    // Create grid container
+    const grid = document.createElement('div');
+    grid.className = 'iphone-grid';
+    
+    // Render each iPhone
+    iphones.forEach(phone => {
+        const card = document.createElement('div');
+        card.className = 'iphone-card';
+        
+        card.innerHTML = `
+            <img src="${phone.image}" alt="${phone.name}" class="iphone-image">
+            <div class="iphone-info">
+                <span class="badge-new ${phone.badgeClass}">${phone.badge}</span>
+                <div class="iphone-name">${phone.name}</div>
+                <div class="iphone-spec"><i class="fas fa-memory"></i> ${phone.storage}</div>
+                <div class="iphone-spec"><i class="fas fa-palette"></i> ${phone.color}</div>
+                <div class="iphone-spec"><i class="fas fa-mobile-alt"></i> ${phone.size}</div>
+                <button class="compare-btn-new" onclick="compareIPhone('${phone.name}', '${phone.storage}', '${phone.color}', '${phone.size}'); event.stopPropagation();">
+                    <i class="fas fa-search"></i> Compare Prices
+                </button>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+    });
+    
+    container.appendChild(grid);
+}
 
-				<h2>Electric Appliences</h2>
-				<div id="myCarousel1" class="carousel slide" data-ride="carousel" data-interval="0">
-					<!-- Carousel indicators -->
-					<ol class="carousel-indicators">
-						<li data-target="#myCarousel1" data-slide-to="0" class="active"></li>
-						<li data-target="#myCarousel1" data-slide-to="1"></li>
-						
-					</ol>
-					<!-- Wrapper for carousel items -->
-					<div class="carousel-inner">
-						<div class="item carousel-item active">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="/img/AC.png" class="img-fluid" alt="">
-										</div>
-										<div class="thumb-content">
-											<h4>AC</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>1400.00</strike> <b>1369.00</b></p>
+// Function to directly compare iPhone prices
+function compareIPhone(name, storage, color, size) {
+    // Show loading overlay
+    const loadingHtml = `
+        <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+            <div style="background: white; padding: 40px; border-radius: 15px; text-align: center; max-width: 400px;">
+                <div class="spinner-border text-primary" role="status" style="width: 3rem; height: 3rem; margin-bottom: 20px;">
+                    <span class="sr-only">Loading...</span>
+                </div>
+                <h3 style="color: #333; margin-bottom: 10px;">Comparing Prices...</h3>
+                <p style="color: #666;">Searching across 5 major e-commerce sites</p>
+                <p style="color: #999; font-size: 14px;">This may take 10-15 seconds</p>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', loadingHtml);
+    
+    // Redirect to comparison page
+    const searchQuery = encodeURIComponent(name);
+    window.location.href = `/compare-iphone?name=${encodeURIComponent(name)}&storage=${encodeURIComponent(storage)}&color=${encodeURIComponent(color)}&size=${encodeURIComponent(size)}&query=${searchQuery}`;
+}
 
-										</div>
-									</div>
-								</div>
+// Run on page load
+document.addEventListener('DOMContentLoaded', renderIPhones);
+</script>
 
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/fan-removebg-preview.png" class="img-fluid" alt="Headphone">
-										</div>
-										<div class="thumb-content">
-											<h4>Fan</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>1200.00</strike> <b>1000.00</b></p>
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/electrical_meter-removebg-preview.png" class="img-fluid"
-												alt="Macbook">
-										</div>
-										<div class="thumb-content">
-											<h4>Electrical Meter</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>899.00</strike> <b>649.00</b></p>
-
-										</div>
-									</div>
-								</div>
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/light-removebg-preview.png" class="img-fluid" alt="Nikon">
-										</div>
-										<div class="thumb-content">
-											<h4>Light</h4>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-											<p class="item-price"><strike>300.00</strike> <b>200.00</b></p>
-
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item carousel-item">
-							<div class="row">
-								<div class="col-sm-3">
-									<div class="thumb-wrapper">
-										<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-										<div class="img-box">
-											<img src="img/blender-removebg-preview.png" class="img-fluid"
-												alt="Play Station">
-										</div>
-										<div class="thumb-content">
-											<h4>Blender</h4>
-											<p class="item-price"><strike>2000.00</strike> <span>169.00</span></p>
-											<div class="star-rating">
-												<ul class="list-inline">
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star"></i></li>
-													<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								
-								
-
-
-
-							</div>
-						</div>
-
-					</div>
-					<!-- Carousel controls -->
-					<a class="carousel-control-prev" href="#myCarousel1" data-slide="prev">
-						<i class="fa fa-angle-left"></i>
-					</a>
-					<a class="carousel-control-next" href="#myCarousel1" data-slide="next">
-						<i class="fa fa-angle-right"></i>
-					</a>
-				</div>
-			</div>
-		</div>
-	</div>
-<!-- 3rd-->
-
-
-<div class="container-xl">
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Networking Solutions</h2>
-			<div id="myCarousel2" class="carousel slide" data-ride="carousel" data-interval="0">
-				<!-- Carousel indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarouse2" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarouse2" data-slide-to="1"></li>
-					
-				</ol>
-				<!-- Wrapper for carousel items -->
-				<div class="carousel-inner">
-					<div class="item carousel-item active">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/hardDisk.png" class="img-fluid" alt="">
-									</div>
-									<div class="thumb-content">
-										<h4>Hard Disk</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>4000.00</strike> <b>3599.00</b></p>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/router.png" class="img-fluid"
-											alt="Headphone">
-									</div>
-									<div class="thumb-content">
-										<h4>Router</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>2500.00</strike> <b>$2300.00</b></p>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/switches.png" class="img-fluid"
-											alt="Macbook">
-									</div>
-									<div class="thumb-content">
-										<h4>Switches</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>600.00</strike> <b>500.00</b></p>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/cables.png" class="img-fluid"
-											alt="Nikon">
-									</div>
-									<div class="thumb-content">
-										<h4>Cables</h4>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-										<p class="item-price"><strike>315.00</strike> <b>250.00</b></p>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="item carousel-item">
-						<div class="row">
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/switches.png" class="img-fluid"
-											alt="Play Station">
-									</div>
-									<div class="thumb-content">
-										<h4>Switches</h4>
-										<p class="item-price"><strike>600.00</strike> <span>500.00</span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/graphics card.png" class="img-fluid"
-											alt="Macbook">
-									</div>
-									<div class="thumb-content">
-										<h4>Graphics Card</h4>
-										<p class="item-price"><strike>4099.00</strike> <span>3869.00</span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-half-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/hardDisk.png" class="img-fluid"
-											alt="Speaker">
-									</div>
-									<div class="thumb-content">
-										<h4>hard Disk</h4>
-										<p class="item-price"><strike>4010.00</strike> <span>3599.00</span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-3">
-								<div class="thumb-wrapper">
-									<span class="wish-icon"><i class="fa fa-heart-o"></i></span>
-									<div class="img-box">
-										<img src="img/network/cables.png" class="img-fluid"
-											alt="Galaxy">
-									</div>
-									<div class="thumb-content">
-										<h4>Cables</h4>
-										<p class="item-price"><strike>315.00</strike> <span>250.00</span></p>
-										<div class="star-rating">
-											<ul class="list-inline">
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star"></i></li>
-												<li class="list-inline-item"><i class="fa fa-star-o"></i></li>
-											</ul>
-										</div>
-
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					
-				</div>
-				<!-- Carousel controls -->
-				<a class="carousel-control-prev" href="#myCarousel2" data-slide="prev">
-					<i class="fa fa-angle-left"></i>
-				</a>
-				<a class="carousel-control-next" href="#myCarousel2" data-slide="next">
-					<i class="fa fa-angle-right"></i>
-				</a>
-			</div>
-		</div>
-	</div>
-</div>
 <footer class="footer">
 	<div class="container-foot">
 		<p class="copyright-text">

@@ -128,6 +128,38 @@ button:hover {
 .hidden {
     display: none;
 }
+
+.alert-message {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: none;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
     </style>
 </head>
 <body>
@@ -135,18 +167,24 @@ button:hover {
         <h1 class="heading">Welcome to Centralized Automated Solution for Price Estimation & Reasonability.</h1>
         <div class="form-container" id="registrationForm">
             <h2>Register</h2>
+            <div id="registerAlert" class="alert-message"></div>
             <form id="registerForm">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" id="name" placeholder="Enter your name" required>
                 </div>
                 <div class="form-group">
-                    <label for="uniqueID">Unique ID</label>
-                    <input type="text" id="uniqueID" placeholder="Enter unique ID" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Phone Number</label>
+                    <input type="tel" id="mobile" placeholder="Enter 10-digit phone number" maxlength="10" pattern="[0-9]{10}" required>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
-                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <input type="password" id="password" placeholder="Must contain capital, symbol & digit" required>
+                    <small style="color: #b0b0b0; font-size: 12px;">Password must have: 1 uppercase, 1 symbol, 1 digit</small>
                 </div>
                 <button type="submit">Register</button>
                 <p class="toggle-link">Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
@@ -155,10 +193,11 @@ button:hover {
 
         <div class="form-container hidden" id="loginForm">
             <h2>Login</h2>
-            <form id="loginForm">
+            <div id="loginAlert" class="alert-message"></div>
+            <form id="loginFormElement">
                 <div class="form-group">
-                    <label for="loginID">Unique ID</label>
-                    <input type="text" id="loginID" placeholder="Enter unique ID" required>
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
                 </div>
                 <div class="form-group">
                     <label for="loginPassword">Password</label>
@@ -172,67 +211,154 @@ button:hover {
     
 
     <script>
+        // Function to show alert messages
+        function showAlert(elementId, message, type) {
+            const alertElement = document.getElementById(elementId);
+            alertElement.textContent = message;
+            alertElement.className = `alert-message alert-${type}`;
+            alertElement.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                alertElement.style.display = 'none';
+            }, 5000);
+        }
+
+        // Email validation function
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Phone validation function
+        function validatePhone(phone) {
+            const phoneRegex = /^[0-9]{10}$/;
+            return phoneRegex.test(phone);
+        }
+
+        // Password validation function
+        function validatePassword(password) {
+            // Must contain: at least 1 uppercase, 1 symbol, 1 digit
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(password);
+            const hasDigit = /[0-9]/.test(password);
+            
+            return hasUppercase && hasSymbol && hasDigit && password.length >= 6;
+        }
+
         document.getElementById("registerForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const name = document.getElementById("name").value;
-    const uniqueID = document.getElementById("uniqueID").value;
-    const password = document.getElementById("password").value;
+            event.preventDefault();
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const mobile = document.getElementById("mobile").value;
+            const password = document.getElementById("password").value;
 
-    if (name && uniqueID && password) {
-        localStorage.setItem("locopilot", JSON.stringify({ 
-            name, 
-            uniqueID, 
-            password,
-            email: "",
-            mobile: "",
-            organization: "",
-            post: ""
-        }));
-        alert("Registration Successful! You can complete your profile later.");
-        toggleForms();
-    } else {
-        alert("Please fill in all fields.");
-    }
-});
+            // Validate email
+            if (!validateEmail(email)) {
+                showAlert('registerAlert', 'Please enter a valid email address.', 'error');
+                return;
+            }
 
-document.getElementById("loginForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-    const loginID = document.getElementById("loginID").value;
-    const loginPassword = document.getElementById("loginPassword").value;
-    
-    const locopilotData = JSON.parse(localStorage.getItem("locopilot"));
-    
-    if (locopilotData && locopilotData.uniqueID === loginID && locopilotData.password === loginPassword) {
-        // Store current logged-in user session
-        localStorage.setItem("currentUser", JSON.stringify({
-            name: locopilotData.name,
-            email: locopilotData.email,
-            mobile: locopilotData.mobile,
-            organization: locopilotData.organization,
-            post: locopilotData.post,
-            uniqueID: locopilotData.uniqueID
-        }));
-        alert("Login Successful! Welcome " + locopilotData.name);
-        window.location.href = "home";
-    } else {
-        alert("Invalid credentials. Please try again.");
-    }
-});
+            // Validate phone
+            if (!validatePhone(mobile)) {
+                showAlert('registerAlert', 'Please enter a valid 10-digit phone number.', 'error');
+                return;
+            }
 
-document.getElementById("switchToLogin").addEventListener("click", function(event) {
-    event.preventDefault();
-    toggleForms();
-});
+            // Validate password
+            if (!validatePassword(password)) {
+                showAlert('registerAlert', 'Password must contain at least: 1 uppercase letter, 1 symbol (!@#$%^&*), 1 digit, and minimum 6 characters.', 'error');
+                return;
+            }
 
-document.getElementById("switchToRegister").addEventListener("click", function(event) {
-    event.preventDefault();
-    toggleForms();
-});
+            if (name && email && mobile && password) {
+                // Check if email already exists
+                const existingUsers = JSON.parse(localStorage.getItem("locopilot")) || [];
+                const emailExists = Array.isArray(existingUsers) 
+                    ? existingUsers.some(user => user.email === email)
+                    : existingUsers.email === email;
+                
+                if (emailExists) {
+                    showAlert('registerAlert', 'Email already registered! Please use a different email.', 'error');
+                    return;
+                }
 
-function toggleForms() {
-    document.getElementById("registrationForm").classList.toggle("hidden");
-    document.getElementById("loginForm").classList.toggle("hidden");
-}
+                // Store as array for multiple users
+                const newUser = { 
+                    name, 
+                    email, 
+                    mobile,
+                    password
+                };
+
+                if (Array.isArray(existingUsers)) {
+                    existingUsers.push(newUser);
+                    localStorage.setItem("locopilot", JSON.stringify(existingUsers));
+                } else if (Object.keys(existingUsers).length === 0) {
+                    localStorage.setItem("locopilot", JSON.stringify([newUser]));
+                } else {
+                    localStorage.setItem("locopilot", JSON.stringify([existingUsers, newUser]));
+                }
+
+                showAlert('registerAlert', 'Registration successful! Please login.', 'success');
+                setTimeout(() => {
+                    toggleForms();
+                    document.getElementById("registerForm").reset();
+                }, 1500);
+            } else {
+                showAlert('registerAlert', 'Please fill in all fields.', 'error');
+            }
+        });
+
+        document.getElementById("loginFormElement").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const loginEmail = document.getElementById("loginEmail").value;
+            const loginPassword = document.getElementById("loginPassword").value;
+            
+            const locopilotData = JSON.parse(localStorage.getItem("locopilot")) || [];
+            
+            let foundUser = null;
+            if (Array.isArray(locopilotData)) {
+                foundUser = locopilotData.find(user => user.email === loginEmail && user.password === loginPassword);
+            } else {
+                if (locopilotData.email === loginEmail && locopilotData.password === loginPassword) {
+                    foundUser = locopilotData;
+                }
+            }
+
+            if (foundUser) {
+                // Store current logged-in user session
+                localStorage.setItem("currentUser", JSON.stringify({
+                    name: foundUser.name,
+                    email: foundUser.email,
+                    mobile: foundUser.mobile
+                }));
+                showAlert('loginAlert', 'Login successful! Welcome ' + foundUser.name, 'success');
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1000);
+            } else {
+                showAlert('loginAlert', 'Invalid credentials. Please try again.', 'error');
+            }
+        });
+
+        document.getElementById("switchToLogin").addEventListener("click", function(event) {
+            event.preventDefault();
+            toggleForms();
+        });
+
+        document.getElementById("switchToRegister").addEventListener("click", function(event) {
+            event.preventDefault();
+            toggleForms();
+        });
+
+        function toggleForms() {
+            document.getElementById("registrationForm").classList.toggle("hidden");
+            document.getElementById("loginForm").classList.toggle("hidden");
+            // Clear alerts when switching forms
+            document.getElementById("registerAlert").style.display = 'none';
+            document.getElementById("loginAlert").style.display = 'none';
+        }
     </script>
     
 </body>
