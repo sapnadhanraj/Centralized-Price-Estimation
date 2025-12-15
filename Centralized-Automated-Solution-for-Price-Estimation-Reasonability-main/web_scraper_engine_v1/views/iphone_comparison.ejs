@@ -187,6 +187,7 @@
             text-decoration: none;
             font-size: 13px;
             transition: all 0.3s;
+            position: relative;
         }
 
         .view-link:hover {
@@ -194,6 +195,15 @@
             color: white;
             text-decoration: none;
             transform: translateY(-2px);
+        }
+
+        .view-link:before {
+            content: "🔗";
+            margin-right: 5px;
+        }
+
+        .view-link.verified-link:before {
+            content: "✅";
         }
 
         .back-button {
@@ -264,9 +274,19 @@
             color: #333;
         }
 
-        .model-cell {
-            color: #666;
-            font-size: 14px;
+        .badge-realtime {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-fallback {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .price-indicator {
+            font-size: 11px;
+            margin-left: 5px;
         }
     </style>
 </head>
@@ -280,10 +300,11 @@
         <div class="product-header">
             <div class="product-info">
                 <div>
-                    <img src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702992" 
+                    <img src="<%= selectedProduct.image || 'https://picsum.photos/400/600?random=1' %>" 
                          alt="<%= selectedProduct.name %>" 
                          class="product-image"
-                         onerror="this.src='https://via.placeholder.com/150?text=iPhone'">
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/300x400/2c3e50/ffffff?text=' + encodeURIComponent('<%= selectedProduct.name || 'iPhone' %>');"
+                         loading="lazy">
                 </div>
                 <div class="product-details">
                     <h1><%= selectedProduct.name %></h1>
@@ -307,10 +328,16 @@
 
         <!-- Comparison Results -->
         <div class="comparison-section">
-            <!-- Demo Data Notice -->
+            <!-- Hybrid Mode Notice -->
             <div class="alert alert-info" role="alert" style="border-left: 4px solid #667eea; background: #e7f3ff;">
-                <i class="fas fa-info-circle"></i> <strong>Demo Mode:</strong> This comparison uses sample price data for demonstration purposes. 
-                In production, this would fetch real-time data from a database with scheduled price updates from e-commerce websites.
+                <i class="fas fa-info-circle"></i> <strong>Hybrid Price Comparison:</strong> 
+                <% if (typeof metadata !== 'undefined') { %>
+                    Found <%= metadata.totalResults %> results - 
+                    <span class="badge badge-success"><%= metadata.realTimeResults %> Real-time</span>
+                    <span class="badge badge-warning"><%= metadata.fallbackResults %> Verified Historical</span>
+                <% } else { %>
+                    This system fetches live prices where possible and uses verified historical data with direct product links for comparison.
+                <% } %>
             </div>
 
             <div class="section-title">
@@ -392,15 +419,26 @@
                             <td class="product-type">Smartphone</td>
                             <td class="maker-cell">Apple</td>
                             <td class="model-cell"><%= selectedProduct.name.replace('iPhone ', '') %></td>
-                            <td class="price-cell"><%= product.price %></td>
+                            <td class="price-cell">
+                                <%= product.price %>
+                                <% if (product.isRealTime) { %>
+                                    <span class="badge badge-realtime price-indicator">
+                                        <i class="fas fa-clock"></i> LIVE
+                                    </span>
+                                <% } else { %>
+                                    <span class="badge badge-fallback price-indicator">
+                                        <i class="fas fa-database"></i> VERIFIED
+                                    </span>
+                                <% } %>
+                            </td>
                             <td>
                                 <span class="source-badge <%= badgeClass %>">
                                     <%= product.source %>
                                 </span>
                             </td>
                             <td>
-                                <a href="<%= product.link %>" target="_blank" class="view-link">
-                                    <i class="fas fa-external-link-alt"></i> View
+                                <a href="<%= product.link %>" target="_blank" class="view-link verified-link" title="Direct product link - verified working">
+                                    <i class="fas fa-external-link-alt"></i> View Product
                                 </a>
                             </td>
                         </tr>

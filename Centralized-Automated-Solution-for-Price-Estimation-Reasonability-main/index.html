@@ -593,29 +593,22 @@
 <script>
 // iPhone Products Data
 const iphones = [
-    // iPhone 15 Series
+    // iPhone 16 Series (Latest - Available on all 5 sites)
+    { name: 'iPhone 16 Pro Max', storage: '256GB', color: 'Black Titanium', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-pro-finish-select-2024-6-7inch-blacktitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
+    { name: 'iPhone 16 Pro', storage: '256GB', color: 'Black Titanium', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-pro-finish-select-2024-6-1inch-blacktitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Pro', badgeClass: 'badge-pro' },
+    { name: 'iPhone 16 Plus', storage: '256GB', color: 'White', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-finish-select-2024-6-7inch-white?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Plus', badgeClass: 'badge-plus' },
+    { name: 'iPhone 16', storage: '128GB', color: 'White', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-finish-select-2024-6-1inch-white?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Regular', badgeClass: 'badge-regular' },
+    
+    // iPhone 15 Series (Available on all 5 sites)
     { name: 'iPhone 15 Pro Max', storage: '256GB', color: 'Natural Titanium', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702992', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
     { name: 'iPhone 15 Pro', storage: '256GB', color: 'Natural Titanium', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845699311', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 15 Plus', storage: '256GB', color: 'Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923777972', badge: 'Plus', badgeClass: 'badge-plus' },
+    { name: 'iPhone 15 Plus', storage: '128GB', color: 'Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923777972', badge: 'Plus', badgeClass: 'badge-plus' },
     { name: 'iPhone 15', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923780378', badge: 'Regular', badgeClass: 'badge-regular' },
     
-    // iPhone 14 Series
+    // iPhone 14 Series (Available on all 5 sites)
     { name: 'iPhone 14 Pro Max', storage: '256GB', color: 'Deep Purple', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
     { name: 'iPhone 14 Pro', storage: '256GB', color: 'Deep Purple', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 14 Plus', storage: '128GB', color: 'Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027780876', badge: 'Plus', badgeClass: 'badge-plus' },
-    { name: 'iPhone 14', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027780876', badge: 'Regular', badgeClass: 'badge-regular' },
-    
-    // iPhone 13 Series
-    { name: 'iPhone 13 Pro Max', storage: '256GB', color: 'Sierra Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
-    { name: 'iPhone 13 Pro', storage: '256GB', color: 'Sierra Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 13', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-blue-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1645572315986', badge: 'Regular', badgeClass: 'badge-regular' },
-    { name: 'iPhone 13 Mini', storage: '128GB', color: 'Blue', size: '5.4 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-mini-blue-select-2021?wid=940&hei=1112&fmt=png-alpha&.v=1645572315986', badge: 'Mini', badgeClass: 'badge-regular' },
-    
-    // iPhone 12 Series
-    { name: 'iPhone 12 Pro Max', storage: '256GB', color: 'Pacific Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-max-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
-    { name: 'iPhone 12 Pro', storage: '256GB', color: 'Pacific Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-13-pro-blue-select?wid=940&hei=1112&fmt=png-alpha&.v=1645552346294', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 12', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-blue-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604021661000', badge: 'Regular', badgeClass: 'badge-regular' },
-    { name: 'iPhone 12 Mini', storage: '128GB', color: 'Blue', size: '5.4 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-12-mini-blue-select-2020?wid=940&hei=1112&fmt=png-alpha&.v=1604021661000', badge: 'Mini', badgeClass: 'badge-regular' }
+    { name: 'iPhone 14', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027780876', badge: 'Regular', badgeClass: 'badge-regular' }
 ];
 
 // Render iPhone products dynamically
