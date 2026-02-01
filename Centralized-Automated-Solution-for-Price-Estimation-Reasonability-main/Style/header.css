@@ -47,6 +47,11 @@ nav {
     background: rgba(255, 255, 255, 0.1);
 }
 
+.nav-items li a.active {
+    background: rgba(255, 255, 255, 0.2);
+    font-weight: 600;
+}
+
 nav form {
     display: flex;
     height: 40px;

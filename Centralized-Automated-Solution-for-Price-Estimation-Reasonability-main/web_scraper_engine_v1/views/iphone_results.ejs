@@ -142,11 +142,6 @@
             color: white;
         }
 
-        .badge-reliance {
-            background: #d51243;
-            color: white;
-        }
-
         .view-btn {
             background: #667eea;
             color: white;
@@ -259,7 +254,7 @@
             <% } %>
         </p>
         <p style="font-size: 14px; opacity: 0.8; margin-top: 5px;">
-            <i class="fas fa-store"></i> Comparing prices from Amazon, Flipkart, Apple, Croma, and Reliance Digital
+            <i class="fas fa-store"></i> Comparing prices from Amazon, Flipkart, and Croma
         </p>
     </div>
 
@@ -358,7 +353,6 @@
                                     else if (product.source.toLowerCase().includes('flipkart')) badgeClass += ' badge-flipkart';
                                     else if (product.source.toLowerCase().includes('apple')) badgeClass += ' badge-apple';
                                     else if (product.source.toLowerCase().includes('croma')) badgeClass += ' badge-croma';
-                                    else if (product.source.toLowerCase().includes('reliance')) badgeClass += ' badge-reliance';
                                     %>
                                     <span class="<%= badgeClass %>">
                                         <i class="fas fa-store"></i> <%= product.source %>

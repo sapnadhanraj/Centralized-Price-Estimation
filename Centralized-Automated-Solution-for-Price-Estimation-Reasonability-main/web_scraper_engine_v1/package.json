@@ -1,12 +1,13 @@
 {
-  "name": "demo",
-  "version": "1.0.0",
-  "description": "",
+  "name": "iphone-price-estimator",
+  "version": "2.0.0",
+  "description": "Real-time iPhone price comparison across 4 e-commerce websites",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon ./app.js"
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js"
   },
-  "keywords": [],
+  "keywords": ["iphone", "price-comparison", "scraper", "e-commerce"],
   "author": "",
   "license": "ISC",
   "dependencies": {

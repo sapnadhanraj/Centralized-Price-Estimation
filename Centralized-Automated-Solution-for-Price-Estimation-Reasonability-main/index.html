@@ -41,7 +41,7 @@
 			text-align: center;
 			text-transform: uppercase;
 			position: relative;
-			margin: 30px 0 60px;
+			margin: 30px 0 25px;
 		}
 
 		h2::after {
@@ -380,6 +380,7 @@
 		</div>
 		<div class="nav-items">
 			<li><a href="index.html">Home</a></li>
+			<li><a href="/home"><i class="fas fa-search"></i> Search Products</a></li>
 			<li><a href="profile-settings.html">Profile Settings</a></li>
 		</div>
 		<div class="search-icon">
@@ -388,11 +389,11 @@
 		<div class="cancel-icon">
 			<span class="fas fa-times"></span>
 		</div>
-		<form action="#">
+		<!-- <form action="#">
 			<input type="search" class="search-data" placeholder="Search" required>
 			<button type="submit" class="fas fa-search"></button>
 			
-		</form>
+		</form> -->
 
 		<img src="img/man-user-circle-icon.png" alt="Profile" class="profile-icon" id="profileImage">
 		<img src="img/logout.png" alt="Logout" id="logout" class="profile-icon" onclick="logout()">
@@ -403,7 +404,7 @@
     <div class="overlay" id="overlay" onclick="hidePopup()"></div>
     <div class="popup" id="popup">
         <h3>Choose an Option</h3>
-        <button class="btn btn-primary" onclick="query_1()"> Query based on exact Make/Model of a Product</button><br>
+        <button class="btn btn-primary" onclick="query_1()">Smartphone Price Comparison (Apple, Samsung, Oppo, Realme, Vivo)</button><br>
         <button class="btn btn-secondary" onclick="query_2()">Query based on Most Relevant Specifications of a Product</button><br>
         <button class="btn btn-success" onclick="openHtmlFile()">Query based on Basic Requirements of a Service</button><br>
         <button class="btn btn-danger" onclick="hidePopup()">Close</button>
@@ -411,7 +412,7 @@
 
 	<script>
 		function query_1() {
-            window.open('iphone-query-1', '_self');
+            window.open('phone-query', '_self');
         }
 
 		function query_2() {
@@ -490,9 +491,9 @@
 <div class="container-xl">
 	<div class="row">
 		<div class="col-md-12">
-			<h1><b><b><i class="fab fa-apple"></i> iPhone Price Comparison Dashboard</b></b></h1>
+			<h1><b><b></i>Price Comparison Dashboard</b></b></h1>
 			<p style="text-align: center; color: #666; margin-bottom: 40px;">
-				Compare prices across Amazon India, Flipkart, Apple India, Croma, and Reliance Digital
+				Compare prices across Amazon India, Flipkart and Croma
 			</p>
 
 			<!-- iPhone products will be dynamically rendered here by JavaScript -->
@@ -591,28 +592,26 @@
 </style>
 
 <script>
-// iPhone Products Data
-const iphones = [
-    // iPhone 16 Series (Latest - Available on all 5 sites)
-    { name: 'iPhone 16 Pro Max', storage: '256GB', color: 'Black Titanium', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-pro-finish-select-2024-6-7inch-blacktitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
-    { name: 'iPhone 16 Pro', storage: '256GB', color: 'Black Titanium', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-pro-finish-select-2024-6-1inch-blacktitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 16 Plus', storage: '256GB', color: 'White', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-finish-select-2024-6-7inch-white?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Plus', badgeClass: 'badge-plus' },
-    { name: 'iPhone 16', storage: '128GB', color: 'White', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-16-finish-select-2024-6-1inch-white?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1725398000000', badge: 'Regular', badgeClass: 'badge-regular' },
-    
-    // iPhone 15 Series (Available on all 5 sites)
-    { name: 'iPhone 15 Pro Max', storage: '256GB', color: 'Natural Titanium', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845702992', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
-    { name: 'iPhone 15 Pro', storage: '256GB', color: 'Natural Titanium', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-1inch-naturaltitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845699311', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 15 Plus', storage: '128GB', color: 'Blue', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-7inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923777972', badge: 'Plus', badgeClass: 'badge-plus' },
-    { name: 'iPhone 15', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692923780378', badge: 'Regular', badgeClass: 'badge-regular' },
-    
-    // iPhone 14 Series (Available on all 5 sites)
-    { name: 'iPhone 14 Pro Max', storage: '256GB', color: 'Deep Purple', size: '6.7 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-7inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896', badge: 'Pro Max', badgeClass: 'badge-pro-max' },
-    { name: 'iPhone 14 Pro', storage: '256GB', color: 'Deep Purple', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-pro-finish-select-202209-6-1inch-deeppurple?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1663703841896', badge: 'Pro', badgeClass: 'badge-pro' },
-    { name: 'iPhone 14', storage: '128GB', color: 'Blue', size: '6.1 inches', image: 'https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-finish-select-202209-6-1inch-blue?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1661027780876', badge: 'Regular', badgeClass: 'badge-regular' }
-];
+// Smartphone Products Data - Fetched from API
+let smartphones = [];
+let brandConfigs = {};
+let currentFilter = 'All';
 
-// Render iPhone products dynamically
-function renderIPhones() {
+// Fetch smartphone data from API
+async function fetchSmartphones() {
+    try {
+        const response = await fetch('/api/smartphones');
+        const data = await response.json();
+        smartphones = data.products;
+        brandConfigs = data.brandConfigs;
+        renderSmartphones();
+    } catch (error) {
+        console.error('Error fetching smartphones:', error);
+    }
+}
+
+// Render Smartphone products dynamically
+function renderSmartphones() {
     const container = document.querySelector('.container-xl .row .col-md-12');
     if (!container) return;
     
@@ -624,24 +623,60 @@ function renderIPhones() {
     const headings = container.querySelectorAll('h2');
     headings.forEach(h => h.remove());
     
+    // Create brand filter tabs
+    const filterContainer = document.createElement('div');
+    filterContainer.className = 'brand-filters';
+    filterContainer.style.cssText = 'display: flex; gap: 10px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap;';
+    
+    const brands = ['All', 'Apple', 'Samsung', 'Oppo', 'Realme', 'Vivo'];
+    brands.forEach(brand => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-btn' + (currentFilter === brand ? ' active' : '');
+        btn.textContent = brand;
+        btn.onclick = () => filterByBrand(brand);
+        btn.style.cssText = `
+            padding: 10px 20px;
+            border: 2px solid ${currentFilter === brand ? '#667eea' : '#ddd'};
+            background: ${currentFilter === brand ? '#667eea' : 'white'};
+            color: ${currentFilter === brand ? 'white' : '#333'};
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        `;
+        filterContainer.appendChild(btn);
+    });
+    
+    container.appendChild(filterContainer);
+    
+    // Filter products
+    const filteredProducts = currentFilter === 'All' 
+        ? smartphones 
+        : smartphones.filter(p => p.brand === currentFilter);
+    
     // Create grid container
     const grid = document.createElement('div');
     grid.className = 'iphone-grid';
     
-    // Render each iPhone
-    iphones.forEach(phone => {
+    // Render each Smartphone
+    filteredProducts.forEach(phone => {
+        const brandConfig = brandConfigs[phone.brand] || { icon: 'fas fa-mobile-alt', color: '#667eea', displayName: phone.brand };
+        
         const card = document.createElement('div');
         card.className = 'iphone-card';
         
         card.innerHTML = `
-            <img src="${phone.image}" alt="${phone.name}" class="iphone-image">
+            <img src="${phone.image || 'https://via.placeholder.com/300x400?text=' + encodeURIComponent(phone.brand)}" 
+                 alt="${phone.model}" 
+                 class="iphone-image"
+                 onerror="this.onerror=null; this.src='https://via.placeholder.com/300x400/667eea/ffffff?text=' + encodeURIComponent('${phone.brand}');">
             <div class="iphone-info">
-                <span class="badge-new ${phone.badgeClass}">${phone.badge}</span>
-                <div class="iphone-name">${phone.name}</div>
-                <div class="iphone-spec"><i class="fas fa-memory"></i> ${phone.storage}</div>
-                <div class="iphone-spec"><i class="fas fa-palette"></i> ${phone.color}</div>
-                <div class="iphone-spec"><i class="fas fa-mobile-alt"></i> ${phone.size}</div>
-                <button class="compare-btn-new" onclick="compareIPhone('${phone.name}', '${phone.storage}', '${phone.color}', '${phone.size}'); event.stopPropagation();">
+                <span class="badge-new" style="background: ${brandConfig.color}; color: white;">
+                    <i class="${brandConfig.icon}"></i> ${phone.brand}
+                </span>
+                <div class="iphone-name">${phone.model}</div>
+                <div class="iphone-spec"><i class="fas fa-tag"></i> ${phone.price || 'Price on request'}</div>
+                <button class="compare-btn-new" onclick="comparePhone('${phone.brand}', '${phone.model}'); event.stopPropagation();">
                     <i class="fas fa-search"></i> Compare Prices
                 </button>
             </div>
@@ -653,8 +688,22 @@ function renderIPhones() {
     container.appendChild(grid);
 }
 
-// Function to directly compare iPhone prices
-function compareIPhone(name, storage, color, size) {
+// Filter products by brand
+function filterByBrand(brand) {
+    currentFilter = brand;
+    const container = document.querySelector('.container-xl .row .col-md-12');
+    if (container) {
+        // Remove only dynamic content (filters and product grid), keep the heading
+        const existingFilters = container.querySelector('.brand-filters');
+        const existingGrid = container.querySelector('.iphone-grid');
+        if (existingFilters) existingFilters.remove();
+        if (existingGrid) existingGrid.remove();
+        renderSmartphones();
+    }
+}
+
+// Function to compare phone prices (for all brands)
+function comparePhone(brand, model) {
     // Show loading overlay
     const loadingHtml = `
         <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; display: flex; align-items: center; justify-content: center;">
@@ -663,35 +712,21 @@ function compareIPhone(name, storage, color, size) {
                     <span class="sr-only">Loading...</span>
                 </div>
                 <h3 style="color: #333; margin-bottom: 10px;">Comparing Prices...</h3>
-                <p style="color: #666;">Searching across 5 major e-commerce sites</p>
-                <p style="color: #999; font-size: 14px;">This may take 10-15 seconds</p>
+                <p style="color: #666;">Searching across 3 major e-commerce sites</p>
+                <p style="color: #999; font-size: 14px;">Amazon, Flipkart, and Croma</p>
             </div>
         </div>
     `;
     document.body.insertAdjacentHTML('beforeend', loadingHtml);
     
-    // Redirect to comparison page
-    const searchQuery = encodeURIComponent(name);
-    window.location.href = `/compare-iphone?name=${encodeURIComponent(name)}&storage=${encodeURIComponent(storage)}&color=${encodeURIComponent(color)}&size=${encodeURIComponent(size)}&query=${searchQuery}`;
+    // Redirect to comparison page with returnUrl to come back to index.html
+    window.location.href = `/compare-phone?brand=${encodeURIComponent(brand)}&model=${encodeURIComponent(model)}&returnUrl=index.html`;
 }
 
 // Run on page load
-document.addEventListener('DOMContentLoaded', renderIPhones);
+document.addEventListener('DOMContentLoaded', fetchSmartphones);
 </script>
 
-<footer class="footer">
-	<div class="container-foot">
-		<p class="copyright-text">
-			&copy; <span id="currentYear"></span> Price Estimator. All Rights Reserved.
-		</p>
-		<ul class="social-icons">
-			<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-			<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-			<li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-			<li><a href="#"><i class="fab fa-instagram"></i></a></li>
-		</ul>
-	</div>
-  </footer>
 </body>
 
 </html>

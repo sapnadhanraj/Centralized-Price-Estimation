@@ -1,100 +1,123 @@
 /**
- * REAL-TIME iPhone Price Scraper
+ * REAL-TIME iPhone Price Scraper with 3 E-commerce Websites
  * 
- * Fetches current prices and working product links from Amazon & Flipkart
+ * Websites:
+ * 1. Amazon India
+ * 2. Flipkart
+ * 3. Croma
+ * 
+ * Features:
+ * - Stealth mode to avoid detection
+ * - Availability checking
+ * - Real product links
+ * - Fallback to database if scraping fails
  */
 
 const puppeteer = require('puppeteer');
+const { iphonePriceDatabase } = require('./iphone-mock-data-test');
+
+// Browser launch options with stealth settings
+const getBrowserOptions = () => ({
+    headless: 'new',
+    args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--disable-gpu',
+        '--window-size=1920x1080',
+        '--disable-web-security',
+        '--disable-features=VizDisplayCompositor',
+        '--disable-blink-features=AutomationControlled'
+    ]
+});
+
+// Common page setup with anti-detection
+async function setupPage(browser) {
+    const page = await browser.newPage();
+    
+    // Set realistic user agent
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+    
+    // Set viewport
+    await page.setViewport({ width: 1920, height: 1080 });
+    
+    // Override navigator properties to avoid detection
+    await page.evaluateOnNewDocument(() => {
+        Object.defineProperty(navigator, 'webdriver', { get: () => undefined });
+        Object.defineProperty(navigator, 'plugins', { get: () => [1, 2, 3, 4, 5] });
+        Object.defineProperty(navigator, 'languages', { get: () => ['en-US', 'en'] });
+    });
+    
+    return page;
+}
 
 /**
- * Real-time Amazon India scraping with working product links
+ * Scrape Amazon India with updated selectors
  */
 async function scrapeAmazonRealtime(modelName) {
     console.log(`[Amazon Real-time] Scraping for: ${modelName}`);
     let browser;
     
     try {
-        browser = await puppeteer.launch({
-            headless: true,
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-web-security',
-                '--disable-blink-features=AutomationControlled'
-            ]
-        });
+        browser = await puppeteer.launch(getBrowserOptions());
+        const page = await setupPage(browser);
         
-        const page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-        await page.setViewport({ width: 1366, height: 768 });
+        const searchQuery = encodeURIComponent(modelName);
+        const searchUrl = `https://www.amazon.in/s?k=${searchQuery}&i=electronics`;
         
-        const searchUrl = `https://www.amazon.in/s?k=${encodeURIComponent(modelName)}&rh=n%3A1389401031&ref=sr_nr_n_1`;
         console.log('[Amazon] Search URL:', searchUrl);
         
         await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-        await page.waitForSelector('[data-component-type="s-search-result"]', { timeout: 15000 });
+        
+        // Wait for products to load
+        try {
+            await page.waitForSelector('[data-component-type="s-search-result"]', { timeout: 10000 });
+        } catch (e) {
+            console.log('[Amazon] No search results found');
+            return [];
+        }
         
         const products = await page.evaluate((searchModel) => {
             const results = [];
             const items = document.querySelectorAll('[data-component-type="s-search-result"]');
             
-            console.log(`Found ${items.length} Amazon search results`);
-            
-            for (let i = 0; i < Math.min(items.length, 5); i++) {
+            for (let i = 0; i < Math.min(items.length, 3); i++) {
                 const item = items[i];
                 
                 // Get product name
-                let productName = '';
-                const nameSelectors = [
-                    'h2 a span',
-                    'h2 span',
-                    '.a-text-normal'
-                ];
-                
-                for (const selector of nameSelectors) {
-                    const nameEl = item.querySelector(selector);
-                    if (nameEl && nameEl.textContent.trim()) {
-                        productName = nameEl.textContent.trim();
-                        break;
-                    }
-                }
+                const nameEl = item.querySelector('h2 a span') || item.querySelector('h2 span');
+                const productName = nameEl ? nameEl.textContent.trim() : '';
                 
                 if (!productName || !productName.toLowerCase().includes('iphone')) continue;
-                if (!productName.toLowerCase().includes(searchModel.toLowerCase().replace('iphone ', ''))) continue;
                 
                 // Get product link
-                let productLink = '';
                 const linkEl = item.querySelector('h2 a');
+                let productLink = '';
                 if (linkEl && linkEl.href) {
-                    productLink = 'https://www.amazon.in' + linkEl.getAttribute('href');
+                    productLink = linkEl.href;
                 }
                 
                 // Get price
-                let priceText = '';
-                const priceSelectors = [
-                    '.a-price .a-offscreen',
-                    '.a-price-whole'
-                ];
+                const priceEl = item.querySelector('.a-price .a-offscreen') || item.querySelector('.a-price-whole');
+                let priceText = priceEl ? priceEl.textContent.trim() : '';
                 
-                for (const selector of priceSelectors) {
-                    const priceEl = item.querySelector(selector);
-                    if (priceEl && priceEl.textContent.trim()) {
-                        priceText = priceEl.textContent.trim();
-                        break;
-                    }
-                }
+                // Get image
+                const imgEl = item.querySelector('img.s-image');
+                const image = imgEl ? imgEl.src : '';
                 
                 if (productName && productLink && priceText) {
                     const priceValue = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
                     
                     results.push({
                         name: productName,
-                        price: priceText,
+                        price: priceText.startsWith('₹') ? priceText : '₹' + priceText,
                         priceValue: priceValue,
                         link: productLink,
                         source: 'Amazon India',
+                        available: true,
                         isRealTime: true,
+                        image: image,
                         scrapedAt: new Date().toISOString()
                     });
                 }
@@ -103,99 +126,94 @@ async function scrapeAmazonRealtime(modelName) {
             return results;
         }, modelName);
         
-        console.log(`[Amazon] Found ${products.length} real products`);
-        return products.slice(0, 2); // Return top 2 results
+        console.log(`[Amazon] Found ${products.length} products`);
+        return products.slice(0, 1);
         
     } catch (error) {
         console.error('[Amazon] Scraping error:', error.message);
         return [];
     } finally {
-        if (browser) {
-            await browser.close();
-        }
+        if (browser) await browser.close();
     }
 }
 
 /**
- * Real-time Flipkart scraping with working product links
+ * Scrape Flipkart with updated selectors
  */
 async function scrapeFlipkartRealtime(modelName) {
     console.log(`[Flipkart Real-time] Scraping for: ${modelName}`);
     let browser;
     
     try {
-        browser = await puppeteer.launch({
-            headless: true,
-            args: [
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-web-security',
-                '--disable-blink-features=AutomationControlled'
-            ]
-        });
+        browser = await puppeteer.launch(getBrowserOptions());
+        const page = await setupPage(browser);
         
-        const page = await browser.newPage();
-        await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
-        await page.setViewport({ width: 1366, height: 768 });
+        const searchQuery = encodeURIComponent(modelName);
+        const searchUrl = `https://www.flipkart.com/search?q=${searchQuery}&otracker=search&marketplace=FLIPKART`;
         
-        const searchUrl = `https://www.flipkart.com/search?q=${encodeURIComponent(modelName)}&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off`;
         console.log('[Flipkart] Search URL:', searchUrl);
         
         await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
-        await page.waitForSelector('[data-id]', { timeout: 15000 });
+        
+        // Close login popup if it appears
+        try {
+            const closeBtn = await page.$('button._2KpZ6l._2doB4z');
+            if (closeBtn) await closeBtn.click();
+        } catch (e) {}
+        
+        // Wait for products
+        try {
+            await page.waitForSelector('[data-id]', { timeout: 10000 });
+        } catch (e) {
+            console.log('[Flipkart] No search results found');
+            return [];
+        }
         
         const products = await page.evaluate((searchModel) => {
             const results = [];
             const items = document.querySelectorAll('[data-id]');
             
-            console.log(`Found ${items.length} Flipkart search results`);
-            
-            for (let i = 0; i < Math.min(items.length, 5); i++) {
+            for (let i = 0; i < Math.min(items.length, 3); i++) {
                 const item = items[i];
                 
-                // Get product name
+                // Get product name - multiple selectors for different layouts
+                const nameSelectors = ['a.wjcEIp', 'a.IRpwTa', 'a.s1Q9rs', 'div._4rR01T', 'a.WKTcLC'];
                 let productName = '';
-                const nameSelectors = [
-                    '.s1Q9rs',
-                    '.IRpwTa',
-                    '.WKTcLC',
-                    '._4rR01T'
-                ];
+                let linkEl = null;
                 
                 for (const selector of nameSelectors) {
-                    const nameEl = item.querySelector(selector);
-                    if (nameEl && nameEl.textContent.trim()) {
-                        productName = nameEl.textContent.trim();
+                    const el = item.querySelector(selector);
+                    if (el && el.textContent.trim()) {
+                        productName = el.textContent.trim();
+                        if (el.tagName === 'A') linkEl = el;
                         break;
                     }
                 }
                 
                 if (!productName || !productName.toLowerCase().includes('iphone')) continue;
-                if (!productName.toLowerCase().includes(searchModel.toLowerCase().replace('iphone ', ''))) continue;
                 
                 // Get product link
                 let productLink = '';
-                const linkEl = item.querySelector('a');
+                if (!linkEl) linkEl = item.querySelector('a');
                 if (linkEl && linkEl.href) {
-                    productLink = 'https://www.flipkart.com' + linkEl.getAttribute('href');
+                    productLink = linkEl.href;
                 }
                 
                 // Get price
+                const priceSelectors = ['div.Nx9bqj', 'div._30jeq3', 'div._1_WHN1'];
                 let priceText = '';
-                const priceSelectors = [
-                    '._30jeq3',
-                    '._1_WHN1',
-                    '.Nx9bqj'
-                ];
                 
                 for (const selector of priceSelectors) {
-                    const priceEl = item.querySelector(selector);
-                    if (priceEl && priceEl.textContent.trim()) {
-                        priceText = priceEl.textContent.trim();
+                    const el = item.querySelector(selector);
+                    if (el && el.textContent.trim()) {
+                        priceText = el.textContent.trim();
                         break;
                     }
                 }
+                
+                // Get image
+                const imgEl = item.querySelector('img._396cs4') || item.querySelector('img');
+                const image = imgEl ? imgEl.src : '';
                 
                 if (productName && productLink && priceText) {
                     const priceValue = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
@@ -206,7 +224,9 @@ async function scrapeFlipkartRealtime(modelName) {
                         priceValue: priceValue,
                         link: productLink,
                         source: 'Flipkart',
+                        available: true,
                         isRealTime: true,
+                        image: image,
                         scrapedAt: new Date().toISOString()
                     });
                 }
@@ -215,66 +235,229 @@ async function scrapeFlipkartRealtime(modelName) {
             return results;
         }, modelName);
         
-        console.log(`[Flipkart] Found ${products.length} real products`);
-        return products.slice(0, 2); // Return top 2 results
+        console.log(`[Flipkart] Found ${products.length} products`);
+        return products.slice(0, 1);
         
     } catch (error) {
         console.error('[Flipkart] Scraping error:', error.message);
         return [];
     } finally {
-        if (browser) {
-            await browser.close();
-        }
+        if (browser) await browser.close();
     }
 }
 
 /**
- * Get real-time prices from both Amazon and Flipkart
+ * Scrape Croma
  */
-async function getRealTimePrices(modelName) {
-    console.log(`\n==================================================`);
-    console.log(`REAL-TIME PRICE ESTIMATION: ${modelName}`);
-    console.log(`Fetching live data from Amazon & Flipkart...`);
-    console.log(`==================================================\n`);
-    
-    const results = [];
+async function scrapeCromaRealtime(modelName) {
+    console.log(`[Croma Real-time] Scraping for: ${modelName}`);
+    let browser;
     
     try {
-        // Scrape both sites simultaneously
-        console.log('🔄 Starting real-time scraping for both sites...');
+        browser = await puppeteer.launch(getBrowserOptions());
+        const page = await setupPage(browser);
         
-        const [amazonData, flipkartData] = await Promise.allSettled([
-            scrapeAmazonRealtime(modelName),
-            scrapeFlipkartRealtime(modelName)
-        ]);
+        const searchQuery = encodeURIComponent(modelName);
+        const searchUrl = `https://www.croma.com/search/?text=${searchQuery}`;
         
-        // Add Amazon results
-        if (amazonData.status === 'fulfilled' && amazonData.value.length > 0) {
-            results.push(...amazonData.value);
-            console.log(`✅ Amazon: ${amazonData.value.length} products found`);
-        } else {
-            console.log('❌ Amazon: No products found or error occurred');
+        console.log('[Croma] Search URL:', searchUrl);
+        
+        await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        
+        // Wait for products
+        try {
+            await page.waitForSelector('.product-item', { timeout: 10000 });
+        } catch (e) {
+            console.log('[Croma] No search results found');
+            return [];
         }
         
-        // Add Flipkart results
-        if (flipkartData.status === 'fulfilled' && flipkartData.value.length > 0) {
-            results.push(...flipkartData.value);
-            console.log(`✅ Flipkart: ${flipkartData.value.length} products found`);
-        } else {
-            console.log('❌ Flipkart: No products found or error occurred');
+        const products = await page.evaluate((searchModel) => {
+            const results = [];
+            const items = document.querySelectorAll('.product-item, .cp-product');
+            
+            for (let i = 0; i < Math.min(items.length, 3); i++) {
+                const item = items[i];
+                
+                // Get product name
+                const nameEl = item.querySelector('.product-title a') || item.querySelector('h3 a');
+                const productName = nameEl ? nameEl.textContent.trim() : '';
+                
+                if (!productName || !productName.toLowerCase().includes('iphone')) continue;
+                
+                // Get product link
+                let productLink = '';
+                if (nameEl && nameEl.href) {
+                    productLink = nameEl.href;
+                }
+                
+                // Get price
+                const priceEl = item.querySelector('.amount') || item.querySelector('.pdp-price');
+                let priceText = priceEl ? priceEl.textContent.trim() : '';
+                
+                // Get image
+                const imgEl = item.querySelector('img');
+                const image = imgEl ? imgEl.src : '';
+                
+                if (productName && productLink && priceText) {
+                    const priceValue = parseInt(priceText.replace(/[^0-9]/g, '')) || 0;
+                    
+                    results.push({
+                        name: productName,
+                        price: priceText.startsWith('₹') ? priceText : '₹' + priceText,
+                        priceValue: priceValue,
+                        link: productLink,
+                        source: 'Croma',
+                        available: true,
+                        isRealTime: true,
+                        image: image,
+                        scrapedAt: new Date().toISOString()
+                    });
+                }
+            }
+            
+            return results;
+        }, modelName);
+        
+        console.log(`[Croma] Found ${products.length} products`);
+        return products.slice(0, 1);
+        
+    } catch (error) {
+        console.error('[Croma] Scraping error:', error.message);
+        return [];
+    } finally {
+        if (browser) await browser.close();
+    }
+}
+
+/**
+ * Scrape Vijay Sales
+ */
+/**
+ * Get fallback data from database
+ */
+function getFallbackData(modelName) {
+    console.log(`[Fallback] Getting database data for: ${modelName}`);
+    
+    // Try exact match first
+    if (iphonePriceDatabase[modelName]) {
+        return iphonePriceDatabase[modelName];
+    }
+    
+    // Try partial match
+    const keys = Object.keys(iphonePriceDatabase);
+    for (const key of keys) {
+        if (modelName.toLowerCase().includes(key.toLowerCase()) || 
+            key.toLowerCase().includes(modelName.toLowerCase())) {
+            return iphonePriceDatabase[key];
+        }
+    }
+    
+    return [];
+}
+
+/**
+ * Main function: Get real-time prices from all 4 websites
+ * Falls back to database if scraping fails
+ */
+async function getRealTimePrices(modelName) {
+    console.log(`\n${'='.repeat(60)}`);
+    console.log(`REAL-TIME PRICE ESTIMATION: ${modelName}`);
+    console.log(`Fetching from 3 websites: Amazon, Flipkart, Croma`);
+    console.log(`${'='.repeat(60)}\n`);
+    
+    const allResults = [];
+    const sources = ['Amazon India', 'Flipkart', 'Croma'];
+    
+    try {
+        // First, get fallback data from database
+        const fallbackData = getFallbackData(modelName);
+        console.log(`[Database] Found ${fallbackData.length} products in database`);
+        
+        // Try real-time scraping (with timeout to avoid long waits)
+        console.log('\n🔄 Attempting real-time scraping...\n');
+        
+        const scrapePromises = [
+            Promise.race([
+                scrapeAmazonRealtime(modelName),
+                new Promise(resolve => setTimeout(() => resolve([]), 15000))
+            ]),
+            Promise.race([
+                scrapeFlipkartRealtime(modelName),
+                new Promise(resolve => setTimeout(() => resolve([]), 15000))
+            ]),
+            Promise.race([
+                scrapeCromaRealtime(modelName),
+                new Promise(resolve => setTimeout(() => resolve([]), 15000))
+            ])
+        ];
+        
+        const [amazonData, flipkartData, cromaData] = await Promise.allSettled(scrapePromises);
+        
+        // Create a map of source to scraped data
+        const scrapedBySource = {
+            'Amazon India': amazonData.status === 'fulfilled' ? amazonData.value : [],
+            'Flipkart': flipkartData.status === 'fulfilled' ? flipkartData.value : [],
+            'Croma': cromaData.status === 'fulfilled' ? cromaData.value : []
+        };
+        
+        // For each source, use scraped data if available, otherwise use fallback
+        for (const source of sources) {
+            const scraped = scrapedBySource[source];
+            const fallback = fallbackData.filter(p => p.source === source);
+            
+            if (scraped && scraped.length > 0) {
+                console.log(`✅ ${source}: Using real-time data (${scraped.length} products)`);
+                allResults.push(...scraped);
+            } else if (fallback && fallback.length > 0) {
+                console.log(`📦 ${source}: Using database data (${fallback.length} products)`);
+                // Add isRealTime: false to indicate it's from database
+                const fallbackWithFlag = fallback.map(p => ({
+                    ...p,
+                    isRealTime: false
+                }));
+                allResults.push(...fallbackWithFlag);
+            } else {
+                console.log(`❌ ${source}: No data available`);
+                // Add a "not available" entry
+                allResults.push({
+                    name: `${modelName}`,
+                    price: null,
+                    priceValue: null,
+                    link: null,
+                    source: source,
+                    available: false,
+                    isRealTime: false
+                });
+            }
         }
         
-        // Sort by price
-        results.sort((a, b) => a.priceValue - b.priceValue);
+        // Sort by price (available products first, then by price)
+        allResults.sort((a, b) => {
+            if (a.available && !b.available) return -1;
+            if (!a.available && b.available) return 1;
+            if (!a.priceValue) return 1;
+            if (!b.priceValue) return -1;
+            return a.priceValue - b.priceValue;
+        });
         
-        console.log(`\n📊 Real-time Results: ${results.length} products`);
-        console.log(`Sources: ${[...new Set(results.map(r => r.source))].join(', ')}`);
-        console.log(`==================================================\n`);
+        console.log(`\n📊 Final Results: ${allResults.length} products`);
+        console.log(`   Available: ${allResults.filter(p => p.available).length}`);
+        console.log(`   Not Available: ${allResults.filter(p => !p.available).length}`);
+        console.log(`${'='.repeat(60)}\n`);
         
-        return results;
+        return allResults;
         
     } catch (error) {
         console.error('Real-time scraping error:', error);
+        
+        // Return database data as fallback
+        const fallbackData = getFallbackData(modelName);
+        if (fallbackData.length > 0) {
+            console.log(`[Fallback] Returning ${fallbackData.length} products from database`);
+            return fallbackData.map(p => ({ ...p, isRealTime: false }));
+        }
+        
         return [];
     }
 }
@@ -282,5 +465,7 @@ async function getRealTimePrices(modelName) {
 module.exports = {
     scrapeAmazonRealtime,
     scrapeFlipkartRealtime,
-    getRealTimePrices
+    scrapeCromaRealtime,
+    getRealTimePrices,
+    getFallbackData
 };

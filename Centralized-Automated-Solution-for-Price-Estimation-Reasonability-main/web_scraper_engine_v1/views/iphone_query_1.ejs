@@ -194,6 +194,7 @@
                 </label>
                 <select id="series" name="series" required onchange="updateModels()">
                     <option value="">-- Select Series --</option>
+                    <option value="iPhone 16">iPhone 16 (Latest)</option>
                     <option value="iPhone 15">iPhone 15</option>
                     <option value="iPhone 14">iPhone 14</option>
                     <option value="iPhone 13">iPhone 13</option>
@@ -235,6 +236,12 @@
 
     <script>
         const modelsData = {
+            "iPhone 16": [
+                { name: "iPhone 16 Pro Max", storage: ["256GB", "512GB", "1TB"] },
+                { name: "iPhone 16 Pro", storage: ["128GB", "256GB", "512GB", "1TB"] },
+                { name: "iPhone 16 Plus", storage: ["128GB", "256GB", "512GB"] },
+                { name: "iPhone 16", storage: ["128GB", "256GB", "512GB"] }
+            ],
             "iPhone 15": [
                 { name: "iPhone 15 Pro Max", storage: ["256GB", "512GB", "1TB"] },
                 { name: "iPhone 15 Pro", storage: ["128GB", "256GB", "512GB", "1TB"] },
