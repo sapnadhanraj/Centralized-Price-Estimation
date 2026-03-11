@@ -369,19 +369,20 @@
                             <th>Product Name</th>
                             <th>Type</th>
                             <th>Maker</th>
-                            <th>Model</th>
+                            <th>Price</th>
                             <th>Source</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% 
-                        // Sort products: available first, then unavailable
+                        // Sort products by price ascending; unavailable go to bottom
                         const sortedProducts = products.sort((a, b) => {
-                            // Unavailable products go to bottom
-                            if (a.available === false && b.available !== false) return 1;
-                            if (a.available !== false && b.available === false) return -1;
-                            return 0;
+                            const aUnavail = a.available === false || !a.price;
+                            const bUnavail = b.available === false || !b.price;
+                            if (aUnavail && !bUnavail) return 1;
+                            if (!aUnavail && bUnavail) return -1;
+                            return (a.priceValue || 0) - (b.priceValue || 0);
                         });
                         
                         sortedProducts.forEach((product, index) => { 
@@ -403,7 +404,7 @@
                             </td>
                             <td class="product-type">Smartphone</td>
                             <td class="maker-cell">Apple</td>
-                            <td class="model-cell"><%= selectedProduct.name.replace('iPhone ', '') %></td>
+                            <td class="price-cell"><%= product.price || 'N/A' %></td>
                             <td>
                                 <span class="source-badge <%= badgeClass %>">
                                     <%= product.source %>
