@@ -719,12 +719,20 @@ function comparePhone(brand, model) {
     `;
     document.body.insertAdjacentHTML('beforeend', loadingHtml);
     
-    // Redirect to comparison page with returnUrl to come back to index.html
-    window.location.href = `/compare-phone?brand=${encodeURIComponent(brand)}&model=${encodeURIComponent(model)}&returnUrl=index.html`;
+    // Redirect to comparison page with returnUrl preserving active brand filter
+    const returnUrl = currentFilter !== 'All' ? `index.html?brand=${encodeURIComponent(currentFilter)}` : 'index.html';
+    window.location.href = `/compare-phone?brand=${encodeURIComponent(brand)}&model=${encodeURIComponent(model)}&returnUrl=${encodeURIComponent(returnUrl)}`;
 }
 
-// Run on page load
-document.addEventListener('DOMContentLoaded', fetchSmartphones);
+// Run on page load - restore brand filter from URL if present
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(window.location.search);
+    const brandParam = params.get('brand');
+    if (brandParam) {
+        currentFilter = brandParam;
+    }
+    fetchSmartphones();
+});
 </script>
 
 </body>

@@ -167,6 +167,7 @@
                 </select>
             </div>
 
+            <input type="hidden" id="returnUrlInput" name="returnUrl">
             <button type="submit" class="search-btn">
                 <i class="fas fa-search"></i> Compare Prices
             </button>
@@ -178,37 +179,62 @@
         const modelsData = {
             "Apple": [
                 "iPhone 16 Pro Max",
+                "iPhone 16 Pro",
+                "iPhone 16",
+                "iPhone 15 Pro Max",
+                "iPhone 15 Pro",
                 "iPhone 15",
                 "iPhone 14",
                 "iPhone 13",
+                "iPhone 12",
                 "iPhone SE"
             ],
             "Samsung": [
                 "Galaxy S24 Ultra",
+                "Galaxy S24 Plus",
+                "Galaxy S24",
                 "Galaxy S23",
                 "Galaxy A55",
                 "Galaxy A35",
-                "Galaxy M35"
+                "Galaxy A25",
+                "Galaxy A15",
+                "Galaxy M35",
+                "Galaxy M15"
             ],
             "Oppo": [
                 "Reno 12 Pro",
+                "Reno 12",
                 "Reno 11 Pro",
+                "Find X7",
                 "F27 Pro",
                 "A3 Pro",
-                "K12x"
+                "A79 5G",
+                "A78 5G",
+                "K12x",
+                "A38"
             ],
             "Realme": [
                 "GT 6",
+                "GT Neo 6",
                 "13 Pro Plus",
+                "13 Pro",
                 "Narzo 70 Pro",
+                "Narzo 70",
                 "P1 Pro",
-                "C65"
+                "P2 Pro",
+                "C65",
+                "C67 5G"
             ],
             "Vivo": [
+                "X100 Pro",
                 "X100",
+                "V40",
                 "V30",
+                "V29",
                 "T3",
+                "T2 Pro",
                 "Y200",
+                "Y100",
                 "Y28"
             ]
         };
@@ -230,6 +256,28 @@
                 });
             }
         }
+
+        // Restore selected brand & model from URL params (when navigating back from comparison page)
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const brandParam = params.get('brand');
+            const modelParam = params.get('model');
+            if (brandParam) {
+                document.getElementById('brand').value = brandParam;
+                updateModels();
+                if (modelParam) {
+                    document.getElementById('model').value = modelParam;
+                }
+            }
+        });
+
+        // Before navigating to comparison, embed the return URL so Back button restores selections
+        document.getElementById('searchForm').addEventListener('submit', function() {
+            const brand = document.getElementById('brand').value;
+            const model = document.getElementById('model').value;
+            document.getElementById('returnUrlInput').value =
+                '/home?brand=' + encodeURIComponent(brand) + '&model=' + encodeURIComponent(model);
+        });
     </script>
 </body>
 </html>
