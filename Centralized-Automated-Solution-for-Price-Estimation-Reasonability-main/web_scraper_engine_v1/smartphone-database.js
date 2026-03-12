@@ -59,7 +59,7 @@ const smartphoneDatabase = {
         { name: 'Apple iPhone SE 64GB', price: '₹39,900', priceValue: 39900, link: 'https://www.croma.com/apple-iphone-se-64gb-midnight-/p/249850', source: 'Croma', available: true, brand: 'Apple', image: 'img/phones/iphone_SE.jpg' }
     ],
     'iPhone 16 Pro': [
-        { name: 'Apple iPhone 16 Pro 128GB', price: '₹1,10,900', priceValue: 110900, link: 'https://www.amazon.in/iphone-16-pro', source: 'Amazon India', available: true, brand: 'Apple', image: getImagePath('iPhone 16 Pro') },
+        { name: 'Apple iPhone 16 Pro 128GB', price: '₹1,10,900', priceValue: 110900, link: 'https://www.amazon.in/s?k=iphone+16+pro&crid=3PZ8H8S5DOBZR&sprefix=iphone+16+pr%2Caps%2C348&ref=nb_sb_noss_2', source: 'Amazon India', available: true, brand: 'Apple', image: getImagePath('iPhone 16 Pro') },
         { name: 'Apple iPhone 16 Pro 128GB', price: '₹1,09,900', priceValue: 109900, link: 'https://www.flipkart.com/apple-iphone-16-pro-black-titanium-128-gb/p/itm12f97adb4c5ed', source: 'Flipkart', available: true, brand: 'Apple', image: getImagePath('iPhone 16 Pro') },
         { name: 'Apple iPhone 16 Pro 128GB', price: '₹1,03,900', priceValue: 103900, link: 'https://www.croma.com/apple-iphone-16-pro-128gb-desert-titanium-/p/309727', source: 'Croma', available: true, brand: 'Apple', image: getImagePath('iPhone 16 Pro') }
     ],
@@ -87,7 +87,7 @@ const smartphoneDatabase = {
     // ==================== SAMSUNG ====================
     'Galaxy S24 Ultra': [
         { name: 'Samsung Galaxy S24 Ultra 12GB 256GB', price: '₹1,09,900', priceValue: 109900, link: 'https://www.amazon.in/s?k=Galaxy+S24+Ultra&crid=28KOL3Z0MRHF9&sprefix=galaxy+s24+ultra%2Caps%2C341&ref=nb_sb_noss_2', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_ultra.jpg' },
-        { name: 'Samsung Galaxy S24 Ultra 12GB 256GB', price: '₹1,08,799', priceValue: 108799, link: generateFlipkartLink('Samsung', 'Galaxy S24 Ultra'), source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_ultra.jpg' },
+        { name: 'Samsung Galaxy S24 Ultra 12GB 256GB', price: '₹1,19,999', priceValue: 119999, link: 'https://www.flipkart.com/samsung-galaxy-s24-ultra-5g-titanium-gray-256-gb/p/itm12ef5ea0212ed', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_ultra.jpg' },
         { name: 'Samsung Galaxy S24 Ultra 12GB 256GB', price: '₹1,19,999', priceValue: 119999, link: 'https://www.croma.com/samsung-galaxy-s24-ultra-5g-12gb-ram-256gb-titanium-gray-/p/303838', source: 'Croma', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_ultra.jpg' }
     ],
     'Galaxy S23': [
@@ -111,18 +111,18 @@ const smartphoneDatabase = {
         { name: 'Samsung Galaxy M35 5G 8GB 128GB', price: '₹16,999', priceValue: 16999, link: 'https://www.croma.com/searchB?q=samsung%20m35%3Arelevance&text=samsung%20m35', source: 'Croma', available: true, brand: 'Samsung', image: 'img/phones/galaxy_M35.jpg' }
     ],
     'Galaxy S24 Plus': [
-        { name: 'Samsung Galaxy S24+ 12GB 256GB', price: '₹69,990', priceValue: 69990, link: 'https://www.amazon.in/Samsung-Galaxy-Smartphone-Cobalt-Storage/dp/B0CS6FPH6P', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_plus.jpg' },
+        { name: 'Samsung Galaxy S24+ 12GB 256GB', price: '₹69,490', priceValue: 69490, link: 'https://www.amazon.in/Samsung-Galaxy-Smartphone-Cobalt-Storage/dp/B0CS6FPH6P', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_plus.jpg' },
         { name: 'Samsung Galaxy S24+ 12GB 256GB', price: '₹59,999', priceValue: 59999, link: 'https://www.flipkart.com/samsung-galaxy-s24-5g-onyx-black-256-gb/p/itm325da4a26d7bb', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_plus.jpg' },
         { name: 'Samsung Galaxy S24+ 12GB 256GB', price: '₹59,999', priceValue: 59999, link: 'https://www.croma.com/samsung-galaxy-s24-plus-5g-12gb-ram-256gb-onyx-black-/p/303861', source: 'Croma', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24_plus.jpg' }
     ],
     'Galaxy S24': [
-        { name: 'Samsung Galaxy S24 8GB 256GB', price: '₹49,490', priceValue: 49490, link: 'https://www.amazon.in/Samsung-Galaxy-Smartphone-Black-Storage/dp/B0CS62KYQY', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24.jpg' },
-        { name: 'Samsung Galaxy S24 8GB 128GB', price: '₹47,999', priceValue: 47999, link: 'https://www.flipkart.com/samsung-galaxy-s24-5g-snapdragon-amber-yellow-128-gb/p/itmd4baa945a78ef', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24.jpg' },
+        { name: 'Samsung Galaxy S24 8GB 256GB', price: '₹43,990', priceValue: 43990, link: 'https://www.amazon.in/Samsung-Galaxy-Smartphone-Black-Storage/dp/B0CS62KYQY', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24.jpg' },
+        { name: 'Samsung Galaxy S24 8GB 128GB', price: '₹42,999', priceValue: 42999, link: 'https://www.flipkart.com/samsung-galaxy-s24-5g-snapdragon-amber-yellow-128-gb/p/itmd4baa945a78ef', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24.jpg' },
         { name: 'Samsung Galaxy S24 8GB 256GB', price: '₹70,999', priceValue: 70999, link: 'https://www.croma.com/samsung-galaxy-s24-5g-8gb-ram-256gb-onyx-black-/p/303849', source: 'Croma', available: true, brand: 'Samsung', image: 'img/phones/galaxy_S24.jpg' }
     ],
     'Galaxy A25': [
         { name: 'Samsung Galaxy A25 5G 8GB 128GB', price: '₹20,999', priceValue: 20999, link: 'https://www.amazon.in/Samsung-Storage-Android-Expandable-Battery/dp/B0CP7VDJN1', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_A25.jpg' },
-        { name: 'Samsung Galaxy A25 5G 8GB 256GB', price: '₹25,990', priceValue: 25990, link: 'https://www.flipkart.com/samsung-galaxy-a25-5g-blue-black-256-gb/p/itm2a8153e01ba0b', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_A25.jpg' },
+        { name: 'Samsung Galaxy A25 5G 8GB 256GB', price: '₹31,499', priceValue: 31499, link: 'https://www.flipkart.com/samsung-galaxy-a25-5g-blue-black-256-gb/p/itm2a8153e01ba0b', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_A25.jpg' },
         { name: 'Samsung Galaxy A25 5G 8GB 128GB', price: '₹18,499', priceValue: 18499, link: 'https://www.croma.com/samsung-galaxy-a25-5g-8gb-ram-128gb-blue-/p/303397', source: 'Croma', available: true, brand: 'Samsung', image: 'img/phones/galaxy_A25.jpg' }
     ],
     'Galaxy A15': [
@@ -132,14 +132,14 @@ const smartphoneDatabase = {
     ],
     'Galaxy M15': [
         { name: 'Samsung Galaxy M15 5G 4GB 128GB', price: '₹12,904', priceValue: 12904, link: 'https://www.amazon.in/Samsung-Celestial-MediaTek-Dimensity-Security/dp/B0DGX9F1T6', source: 'Amazon India', available: true, brand: 'Samsung', image: 'img/phones/galaxy_M15.jpg' },
-        { name: 'Samsung Galaxy M15 5G 4GB 128GB', price: '₹11,904', priceValue: 11904, link: 'https://www.flipkart.com/samsung-galaxy-m15-5g-celestrial-blue-128-gb/p/itmf5a4280beb534', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_M15.jpg' },
+        { name: 'Samsung Galaxy M15 5G 4GB 128GB', price: '₹11,885', priceValue: 11885, link: 'https://www.flipkart.com/samsung-galaxy-m15-5g-blue-topaz-128-gb/p/itm99bbe4613b680', source: 'Flipkart', available: true, brand: 'Samsung', image: 'img/phones/galaxy_M15.jpg' },
         { name: 'Samsung Galaxy M15 5G 4GB 128GB', price: '₹11,904', priceValue: 11904, link: 'https://www.croma.com/samsung-galaxy-m15-5g-prime-4gb-ram-128gb-dark-blue-/p/306006', source: 'Croma', available: true, brand: 'Samsung', image: 'img/phones/galaxy_M15.jpg' }
     ],
 
     // ==================== OPPO ====================
     'Reno 12 Pro': [
         { name: 'Oppo Reno 12 Pro 5G 12GB 256GB', price: '₹29,999', priceValue: 29999, link: 'https://www.amazon.in/Oppo-Reno-Pro-Sunset-Gold/dp/B0D9C5JZCT', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/reno_12_Pro.jpg' },
-        { name: 'Oppo Reno 12 Pro 5G 12GB 256GB', price: '₹34,999', priceValue: 34999, link: 'https://www.flipkart.com/oppo-reno-12-pro-5g-sunset-gold-256-gb/p/itmed01efe011f83', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/reno_12_Pro.jpg' },
+        { name: 'Oppo Reno 12 Pro 5G 12GB 256GB', price: '₹53,999', priceValue: 53999, link: 'https://www.flipkart.com/oppo-reno-12-pro-5g-sunset-gold-256-gb/p/itmed01efe011f83', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/reno_12_Pro.jpg' },
         { name: 'Oppo Reno 12 Pro 5G 12GB 256GB', price: '₹32,999', priceValue: 32999, link: 'https://www.croma.com/oppo-reno-12-pro-5g-12gb-ram-256gb-sunset-gold-/p/307963', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/reno_12_Pro.jpg' }
     ],
     'Reno 11 Pro': [
@@ -150,16 +150,16 @@ const smartphoneDatabase = {
     'F27 Pro': [
         { name: 'Oppo F27 Pro 5G 8GB 128GB', price: '₹27,999', priceValue: 27999, link: 'https://www.amazon.in/Midnight-Toughest-Featured-SUPERVOOC-Additional/dp/B0D53Y9W5D', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/f27_Pro.jpg' },
         { name: 'Oppo F27 Pro 5G 8GB 128GB', price: '₹34,999', priceValue: 34999, link: 'https://www.flipkart.com/oppo-f27-pro-midnight-navy-128-gb/p/itm5235c3c836cc9', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/f27_Pro.jpg' },
-        { name: 'Oppo F27 Pro Plus 5G 8GB 128GB', price: '₹21,999', priceValue: 21999, link: 'https://www.croma.com/oppo-f27-pro-plus-5g-8gb-ram-128gb-midnight-navy-/p/307373', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/f27_Pro.jpg' }
+        { name: 'Oppo F27 Pro Plus 5G 8GB 128GB', price: '₹19,999', priceValue: 19999, link: 'https://www.croma.com/oppo-f27-pro-plus-5g-8gb-ram-128gb-midnight-navy-/p/307373', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/f27_Pro.jpg' }
     ],
     'A3 Pro': [
         { name: 'Oppo A3 Pro 5G 8GB 128GB', price: '₹18,390', priceValue: 18390, link: 'https://www.amazon.in/Storage-Refresh-SUPERVOOC-Additional-Exchange/dp/B0D6R9RGN8', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/a3_Pro.jpg' },
-        { name: 'Oppo A3 Pro 5G 8GB 128GB', price: '₹16,999', priceValue: 16999, link: 'https://www.flipkart.com/oppo-a3-pro-5g-moonlight-purple-128-gb/p/itm296e480f459a5', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a3_Pro.jpg' },
+        { name: 'Oppo A3 Pro 5G 8GB 128GB', price: '₹14,999', priceValue: 14999, link: 'https://www.flipkart.com/oppo-a3-pro-5g-moonlight-purple-128-gb/p/itm296e480f459a5', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a3_Pro.jpg' },
         { name: 'Oppo A3 Pro 5G 8GB 128GB', price: '₹16,999', priceValue: 16999, link: 'https://www.croma.com/oppo-a3-pro-5g-8gb-ram-128gb-starry-black-/p/307491', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/a3_Pro.jpg' }
     ],
     'K12x': [
         { name: 'Oppo K12x 5G 8GB 128GB', price: '₹12,747', priceValue: 12747, link: 'https://www.amazon.in/Oppo-K12x-SUPERVOOC-Charger-Breeze/dp/B0DHCXDHWQ', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/K12x.jpg' },
-        { name: 'Oppo K12x 5G 8GB 128GB', price: '₹16,999', priceValue: 16999, link: 'https://www.flipkart.com/oppo-k12x-5g-45w-supervooc-charger-in-the-box-feather-pink-128-gb/p/itma30cb38861d4c', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/K12x.jpg' },
+        { name: 'Oppo K12x 5G 8GB 128GB', price: '₹18,999', priceValue: 18999, link: 'https://www.flipkart.com/oppo-k12x-5g-45w-supervooc-charger-in-the-box-feather-pink-128-gb/p/itma30cb38861d4c', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/K12x.jpg' },
         { name: 'Oppo K12x 5G 8GB 128GB', price: '₹12,999', priceValue: 12999, link: 'https://www.croma.com/oppo-k12x-5g-6gb-ram-128gb-breeze-blue-/p/308829', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/K12x.jpg' }
     ],
     'Find X7': [
@@ -174,16 +174,16 @@ const smartphoneDatabase = {
     ],
     'A79 5G': [
         { name: 'Oppo A79 5G 8GB 128GB', price: '₹16,299', priceValue: 16299, link: 'https://www.amazon.in/Oppo-Glowing-SUPERVOOC-Additional-Exchange/dp/B0CL53RJML', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/a79_5g.jpg' },
-        { name: 'Oppo A79 5G 8GB 128GB', price: '₹17,286', priceValue: 17286, link: 'https://www.flipkart.com/oppo-a79-5g-mystery-black-128-gb/p/itm5c4f5a203ee1f', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a79_5g.jpg' },
+        { name: 'Oppo A79 5G 8GB 128GB', price: '₹17,179', priceValue: 17179, link: 'https://www.flipkart.com/oppo-a79-5g-mystery-black-128-gb/p/itm5c4f5a203ee1f', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a79_5g.jpg' },
         { name: 'Oppo A79 5G 8GB 128GB', price: '₹14,199', priceValue: 14199, link: 'https://www.croma.com/oppo-a79-5g-8gb-ram-128gb-glowing-green-/p/302439', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/a79_5g.jpg' }
     ],
     'A78 5G': [
         { name: 'Oppo A78 5G 8GB 128GB', price: '₹16,190', priceValue: 16190, link: 'https://www.amazon.in/Oppo-Glowing-SUPERVOOC-Additional-Exchange/dp/B082F2T5PQ', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/a78_5g.jpg' },
-        { name: 'Oppo A78 5G 8GB 128GB', price: '₹15,999', priceValue: 15999, link: 'https://www.flipkart.com/oppo-a78-5g-glowing-blue-128-gb/p/itmf1eeaf323aaa5', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a78_5g.jpg' },
+        { name: 'Oppo A78 5G 8GB 128GB', price: '₹18,999', priceValue: 18999, link: 'https://www.flipkart.com/oppo-a78-5g-glowing-blue-128-gb/p/itmf1eeaf323aaa5', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a78_5g.jpg' },
         { name: 'Oppo A78 5G 8GB 128GB', price: '₹18,999', priceValue: 18999, link: 'https://www.croma.com/oppo-a78-5g-8gb-ram-128gb-glowing-black-/p/267796', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/a78_5g.jpg' }
     ],
     'A38': [
-        { name: 'Oppo A38 4G 4GB 128GB', price: '₹10,800', priceValue: 10800, link: 'https://www.amazon.in/Glowing-SUPERVOOC-Waterdrop-Additional-Exchange/dp/B0CHDW6N8J', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/a38.jpg' },
+        { name: 'Oppo A38 4G 4GB 128GB', price: '₹11,590', priceValue: 11590, link: 'https://www.amazon.in/Glowing-SUPERVOOC-Waterdrop-Additional-Exchange/dp/B0CHDW6N8J', source: 'Amazon India', available: true, brand: 'Oppo', image: 'img/phones/a38.jpg' },
         { name: 'Oppo A38 4G 4GB 128GB', price: '₹11,888', priceValue: 11888, link: 'https://www.flipkart.com/oppo-a38-glowing-black-128-gb/p/itme1efb05b1af7f', source: 'Flipkart', available: true, brand: 'Oppo', image: 'img/phones/a38.jpg' },
         { name: 'Oppo A38 4G 4GB 128GB', price: '₹9,994', priceValue: 9994, link: 'https://www.croma.com/oppo-a38-4gb-ram-128gb-glowing-black-/p/300502', source: 'Croma', available: true, brand: 'Oppo', image: 'img/phones/a38.jpg' }
     ],
@@ -206,13 +206,13 @@ const smartphoneDatabase = {
     ],
     'P1 Pro': [
         { name: 'Realme P1 Pro 5G 8GB 128GB', price: '₹18,999', priceValue: 18999, link: 'https://www.amazon.in/realme-Phoenix-Snapdragon-Processor-Resistance/dp/B0D2L7CG3D', source: 'Amazon India', available: true, brand: 'Realme', image: 'img/phones/P1_Pro.jpg' },
-        { name: 'Realme P1 Pro 5G 8GB 128GB', price: '₹17,999', priceValue: 17999, link: 'https://www.flipkart.com/realme-p1-pro-5g-phoenix-red-128-gb/p/itmc859edf8053dc', source: 'Flipkart', available: true, brand: 'Realme', image: 'img/phones/P1_Pro.jpg' },
+        { name: 'Realme P1 Pro 5G 8GB 128GB', price: '₹15,999', priceValue: 15999, link: 'https://www.flipkart.com/realme-p1-pro-5g-parrot-blue-128-gb/p/itmc859edf8053dc', source: 'Flipkart', available: true, brand: 'Realme', image: 'img/phones/P1_Pro.jpg' },
         { name: 'Realme P1 Pro 5G 8GB 128GB', price: '₹16,999', priceValue: 16999, link: 'https://www.croma.com/searchB?q=real%20me%20p1%20pro%3Arelevance&text=real%20me%20p1%20pro', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/P1_Pro.jpg' }
     ],
     'C65': [
         { name: 'Realme C65 5G 6GB 128GB', price: '₹10,900', priceValue: 10900, link: 'https://www.amazon.in/realme-C65-Feather-Green-128/dp/B0D2DNDQZW', source: 'Amazon India', available: true, brand: 'Realme', image: 'img/phones/C65.png' },
         { name: 'Realme C65 5G 6GB 128GB', price: '₹9,300', priceValue: 9300, link: 'https://www.flipkart.com/realme-c65-5g-feather-green-128-gb/p/itma294063ac4410', source: 'Flipkart', available: true, brand: 'Realme', image: 'img/phones/C65.png' },
-        { name: 'Realme C65 5G 6GB 128GB', price: '₹10,999', priceValue: 10999, link: 'https://www.croma.com/realme-c65-5g-6gb-ram-128gb-feather-green-/p/306436', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/C65.png' }
+        { name: 'Realme C65 5G 6GB 128GB', price: '₹11,999', priceValue: 11999, link: 'https://www.croma.com/realme-c65-5g-6gb-ram-128gb-feather-green-/p/306436', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/C65.png' }
     ],
     'GT Neo 6': [
         { name: 'Realme GT Neo 6 5G 12GB 256GB', price: '₹27,999', priceValue: 27999, link: 'https://www.amazon.in/gt-neo-6/s?k=gt+neo+6', source: 'Amazon India', available: true, brand: 'Realme', image: 'img/phones/GT_Neo_6.jpg' },
@@ -221,8 +221,8 @@ const smartphoneDatabase = {
     ],
     '13 Pro': [
         { name: 'Realme 13 Pro 5G 8GB 128GB', price: '₹22,999', priceValue: 22999, link: 'https://www.amazon.in/realme-Pro-Monet-Gold-128GB/dp/B0DBM2XQYF', source: 'Amazon India', available: true, brand: 'Realme', image: 'img/phones/13_Pro.jpg' },
-        { name: 'Realme 13 Pro 5G 8GB 256GB', price: '₹21,999', priceValue: 21999, link: 'https://www.flipkart.com/realme-13-pro-5g-monet-purple-256-gb/p/itmf7360eb52d883', source: 'Flipkart', available: true, brand: 'Realme', image: 'img/phones/13_Pro.jpg' },
-        { name: 'Realme 13 Pro 5G 8GB 128GB', price: '₹25,494', priceValue: 25494, link: 'https://www.croma.com/realme-13-pro-5g-8gb-ram-128gb-emerald-green-/p/308739', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/13_Pro.jpg' }
+        { name: 'Realme 13 Pro 5G 8GB 256GB', price: '₹29,890', priceValue: 29890, link: 'https://www.flipkart.com/realme-13-pro-5g-monet-purple-256-gb/p/itmf7360eb52d883', source: 'Flipkart', available: true, brand: 'Realme', image: 'img/phones/13_Pro.jpg' },
+        { name: 'Realme 13 Pro 5G 8GB 128GB', price: '₹23,994', priceValue: 23994, link: 'https://www.croma.com/realme-13-pro-5g-8gb-ram-128gb-emerald-green-/p/308739', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/13_Pro.jpg' }
     ],
     'Narzo 70': [
         { name: 'Realme Narzo 70 5G 6GB 128GB', price: '₹13,500', priceValue: 13500, link: 'https://www.amazon.in/realme-narzo-Pro-128-Green/dp/B0CHQKRVMQ', source: 'Amazon India', available: true, brand: 'Realme', image: 'img/phones/Narzo_70.jpg' },
@@ -237,7 +237,7 @@ const smartphoneDatabase = {
     'C67 5G': [
         { name: 'Realme C67 5G 4GB 128GB', price: '₹14,999', priceValue: 14999, link: 'https://www.amazon.in/realme-C67-Sunny-Oasis-128/dp/B0CPVMQQH9', source: 'Amazon India', available: true, brand: 'Realme', image: 'img/phones/C67.jpg' },
         { name: 'Realme C67 5G 4GB 128GB', price: '₹14,999', priceValue: 14999, link: 'https://www.flipkart.com/realme-c67-5g-sunny-oasis-128-gb/p/itm1e65b288f166f', source: 'Flipkart', available: true, brand: 'Realme', image: 'img/phones/C67.jpg' },
-        { name: 'Realme C67 5G 4GB 128GB', price: '₹13,194', priceValue: 13194, link: 'https://www.croma.com/realme-c67-5g-4gb-ram-128gb-dark-purple-/p/303219', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/C67.jpg' }
+        { name: 'Realme C67 5G 4GB 128GB', price: '₹11,694', priceValue: 11694, link: 'https://www.croma.com/realme-c67-5g-4gb-ram-128gb-dark-purple-/p/303219', source: 'Croma', available: true, brand: 'Realme', image: 'img/phones/C67.jpg' }
     ],
 
     // ==================== VIVO ====================
@@ -248,7 +248,7 @@ const smartphoneDatabase = {
     ],
     'V30': [
         { name: 'Vivo V30 5G 8GB 128GB', price: '₹28,999', priceValue: 28999, link: 'https://www.amazon.in/Peacock-Storage-Additional-Exchange-Offers/dp/B07WHRBK8X', source: 'Amazon India', available: true, brand: 'Vivo', image: 'img/phones/V30.jpg' },
-        { name: 'Vivo V30 5G 8GB 128GB', price: '₹31,999', priceValue: 31999, link: 'https://www.flipkart.com/vivo-v30-5g-andaman-blue-128-gb/p/itme3a94b78a025f', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/V30.jpg' },
+        { name: 'Vivo V30 5G 8GB 128GB', price: '₹31,999', priceValue: 31999, link: 'https://www.flipkart.com/vivo-v30-5g-classic-black-128-gb/p/itme3a94b78a025f', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/V30.jpg' },
         { name: 'Vivo V30 5G 8GB 128GB', price: '₹25,499', priceValue: 25499, link: 'https://www.croma.com/vivo-v30-5g-8gb-ram-128gb-classic-black-/p/305298', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/V30.jpg' }
     ],
     'T3': [
@@ -258,7 +258,7 @@ const smartphoneDatabase = {
     ],
     'Y200': [
         { name: 'Vivo Y200 5G 8GB 128GB', price: '₹22,999', priceValue: 22999, link: 'https://www.amazon.in/Vivo-Desert-Storage-Additional-Exchange/dp/B07WHPL866', source: 'Amazon India', available: true, brand: 'Vivo', image: 'img/phones/Y200.jpg' },
-        { name: 'Vivo Y200 5G 8GB 128GB', price: '₹21,999', priceValue: 21999, link: 'https://www.flipkart.com/vivo-y200-5g-desert-gold-128-gb/p/itmdca298200fe9e', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/Y200.jpg' },
+        { name: 'Vivo Y200 5G 8GB 128GB', price: '₹21,999', priceValue: 21999, link: 'https://www.flipkart.com/vivo-y200-5g-jungle-green-128-gb/p/itmc79ade2c32297', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/Y200.jpg' },
         { name: 'Vivo Y200 5G 8GB 128GB', price: '₹21,599', priceValue: 21599, link: 'https://www.croma.com/vivo-y200-5g-8gb-ram-128gb-jungle-green-/p/302301', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/Y200.jpg' }
     ],
     'Y28': [
@@ -274,7 +274,7 @@ const smartphoneDatabase = {
     'V40': [
         { name: 'Vivo V40 5G 8GB 256GB', price: '₹36,999', priceValue: 36999, link: 'https://www.amazon.in/Titanium-Storage-Additional-Exchange-Offers/dp/B07WGPKPH3', source: 'Amazon India', available: true, brand: 'Vivo', image: 'img/phones/V40.jpg' },
         { name: 'Vivo V40 5G 8GB 128GB', price: '₹34,999', priceValue: 34999, link: 'https://www.flipkart.com/vivo-v40-5g-ganges-blue-128-gb/p/itm444f2b97f5db4', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/V40.jpg' },
-        { name: 'Vivo V40 5G 8GB 256GB', price: '₹34,999', priceValue: 34999, link: 'https://www.croma.com/vivo-v40-5g-8gb-ram-256gb-titanium-grey-/p/308790', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/V40.jpg' }
+        { name: 'Vivo V40 5G 8GB 256GB', price: '₹36,999', priceValue: 36999, link: 'https://www.croma.com/vivo-v40-5g-8gb-ram-256gb-titanium-grey-/p/308790', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/V40.jpg' }
     ],
     'V29': [
         { name: 'Vivo V29 5G 12GB 256GB', price: '₹32,999', priceValue: 32999, link: 'https://www.amazon.in/Vivo-V29-Red-128-RAM/dp/B0CLDNSRJM', source: 'Amazon India', available: true, brand: 'Vivo', image: 'img/phones/V29.jpg' },
@@ -287,9 +287,9 @@ const smartphoneDatabase = {
         { name: 'Vivo T2 5G 8GB 128GB', price: '₹17,999', priceValue: 17999, link: 'https://www.croma.com/vivo-t2-5g-8gb-ram-128gb-nitro-blaze-/p/271394', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/T2_Pro.jpg' }
     ],
     'Y100': [
-        { name: 'Vivo Y100 5G 8GB 128GB', price: '₹17,778', priceValue: 17778, link: 'https://www.amazon.in/Vivo-Twilight-Storage-Additional-Exchange/dp/B07WHQQ97D', source: 'Amazon India', available: true, brand: 'Vivo', image: 'img/phones/Y100.jpg' },
-        { name: 'Vivo Y100 5G 8GB 128GB', price: '₹16,778', priceValue: 16778, link: 'https://www.flipkart.com/vivo-y100-5g-twilight-gold-128-gb/p/itm02d7cc65cf584', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/Y100.jpg' },
-        { name: 'Vivo Y100 5G 8GB 128GB', price: '₹15,778', priceValue: 15778, link: 'https://www.croma.com/vivo-y100-5g-8gb-ram-128gb-metal-black-/p/268558', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/Y100.jpg' }
+        { name: 'Vivo Y100 5G 8GB 128GB', price: '₹20,990', priceValue: 20990, link: 'https://www.amazon.in/Vivo-Twilight-Storage-Additional-Exchange/dp/B07WHQQ97D', source: 'Amazon India', available: true, brand: 'Vivo', image: 'img/phones/Y100.jpg' },
+        { name: 'Vivo Y100 5G 8GB 128GB', price: '₹16,788', priceValue: 16788, link: 'https://www.flipkart.com/vivo-y100-5g-twilight-gold-128-gb/p/itm02d7cc65cf584', source: 'Flipkart', available: true, brand: 'Vivo', image: 'img/phones/Y100.jpg' },
+        { name: 'Vivo Y100 5G 8GB 128GB', price: '₹20,990', priceValue: 20990, link: 'https://www.croma.com/vivo-y100-5g-8gb-ram-128gb-metal-black-/p/268558', source: 'Croma', available: true, brand: 'Vivo', image: 'img/phones/Y100.jpg' }
     ]
 };
 
