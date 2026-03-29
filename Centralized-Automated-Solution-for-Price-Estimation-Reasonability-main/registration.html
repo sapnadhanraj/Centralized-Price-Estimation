@@ -244,8 +244,17 @@
 
         // Email validation function
         function validateEmail(email) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email);
+            // Must match standard format: local@domain.tld
+            // Domain part must have exactly one dot-separated TLD (no repeated extensions like .com.com)
+            const emailRegex = /^[^\s@]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,}$/;
+            if (!emailRegex.test(email)) return false;
+            // Reject if the TLD part contains duplicate extensions e.g. .com.com
+            const domainPart = email.split('@')[1];
+            const parts = domainPart.split('.');
+            const tldParts = parts.slice(1); // everything after first label
+            const uniqueTlds = new Set(tldParts.map(p => p.toLowerCase()));
+            if (uniqueTlds.size !== tldParts.length) return false;
+            return true;
         }
 
         // Phone validation function

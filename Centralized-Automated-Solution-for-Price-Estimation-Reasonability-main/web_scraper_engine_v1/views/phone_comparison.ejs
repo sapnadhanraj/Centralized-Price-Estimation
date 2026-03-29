@@ -385,7 +385,8 @@
                         });
                         
                         sortedProducts.forEach((product, index) => { 
-                            const isAvailable = product.available !== false && product.price;
+                            const isListed = product.available !== false;
+                            const hasPrice = product.price != null;
                             
                             // Determine source badge class
                             let badgeClass = 'badge-amazon';
@@ -394,28 +395,34 @@
                             else if (sourceLower.includes('apple')) badgeClass = 'badge-apple';
                             else if (sourceLower.includes('croma')) badgeClass = 'badge-croma';
                         %>
-                        <tr class="<%= !isAvailable ? 'not-available-row' : '' %>">
+                        <tr class="<%= !isListed ? 'not-available-row' : '' %>">
                             <td>
                                 <strong><%= product.name || selectedProduct.fullName %></strong>
-                                <% if (!isAvailable) { %>
+                                <% if (!isListed) { %>
                                     <span class="badge badge-danger ml-2">Out of Stock</span>
                                 <% } %>
                             </td>
                             <td>Smartphone</td>
                             <td class="maker-cell"><%= selectedProduct.brand %></td>
-                            <td><%= product.price || 'N/A' %></td>
+                            <td>
+                                <% if (hasPrice) { %>
+                                    <span class="price-cell"><%= product.price %></span>
+                                <% } else { %>
+                                    <span class="price-na">Currently unavailable</span>
+                                <% } %>
+                            </td>
                             <td>
                                 <span class="source-badge <%= badgeClass %>">
                                     <%= product.source %>
                                 </span>
                             </td>
                             <td>
-                                <% if (isAvailable && product.link) { %>
+                                <% if (isListed && product.link) { %>
                                     <a href="<%= product.link %>" target="_blank" class="view-link" title="Search for this phone on the website">
                                         <i class="fas fa-search"></i> Search on Site
                                     </a>
-                                <% } else { %>
-                                    <span class="not-available-btn" title="Product not available">
+                                <% } else if (product.link) { %>
+                                    <span class="not-available-btn" title="Product not available on this site">
                                         Not Available
                                     </span>
                                 <% } %>
